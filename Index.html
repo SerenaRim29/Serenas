@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serenas — Ash Scattering in Spain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --sage: #6b7f6a; --sage-light: #c4d0be; --sage-pale: #eef2ec;
+    --dusk: #8c8076; --sand: #f5f0e8; --stone: #3d3832; --mist: #f9f7f4;
+    --text: #3d3832; --text-muted: #7a736b;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--mist); color: var(--text); line-height: 1.7; overflow-x: hidden; }
+
+  /* LANG */
+  [data-lang] { display: none; }
+  body.lang-en [data-lang="en"],
+  body.lang-es [data-lang="es"] { display: revert; }
+  span[data-lang], a[data-lang], p[data-lang], h1[data-lang], h2[data-lang], h4[data-lang], li[data-lang], ul[data-lang] { display: none; }
+  body.lang-en span[data-lang="en"], body.lang-en a[data-lang="en"],
+  body.lang-en p[data-lang="en"], body.lang-en h1[data-lang="en"],
+  body.lang-en h2[data-lang="en"], body.lang-en h4[data-lang="en"],
+  body.lang-en li[data-lang="en"], body.lang-en ul[data-lang="en"] { display: revert; }
+  body.lang-es span[data-lang="es"], body.lang-es a[data-lang="es"],
+  body.lang-es p[data-lang="es"], body.lang-es h1[data-lang="es"],
+  body.lang-es h2[data-lang="es"], body.lang-es h4[data-lang="es"],
+  body.lang-es li[data-lang="es"], body.lang-es ul[data-lang="es"] { display: revert; }
+  /* nav links always show */
+  .nav-links li { display: list-item !important; }
+  /* inline spans inside always-visible elements */
+  .nav-links a span[data-lang], .hero-eyebrow span[data-lang],
+  .section-label span[data-lang], .location-item span[data-lang],
+  .service-name span[data-lang], .step-title span[data-lang] { display: none; }
+  body.lang-en .nav-links a span[data-lang="en"],
+  body.lang-en .hero-eyebrow span[data-lang="en"],
+  body.lang-en .section-label span[data-lang="en"],
+  body.lang-en .location-item span[data-lang="en"],
+  body.lang-en .service-name span[data-lang="en"],
+  body.lang-en .step-title span[data-lang="en"] { display: inline; }
+  body.lang-es .nav-links a span[data-lang="es"],
+  body.lang-es .hero-eyebrow span[data-lang="es"],
+  body.lang-es .section-label span[data-lang="es"],
+  body.lang-es .location-item span[data-lang="es"],
+  body.lang-es .service-name span[data-lang="es"],
+  body.lang-es .step-title span[data-lang="es"] { display: inline; }
+
+  /* LANG TOGGLE */
+  .lang-toggle { display: flex; }
+  .lang-btn {
+    font-size: 1.1rem;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid rgba(107,127,106,0.35); background: transparent;
+    cursor: pointer; transition: all 0.2s;
+    line-height: 0;
+    opacity: 0.55;
+    display: flex; align-items: center;
+  }
+  .lang-btn:first-child { border-right: none; }
+  .lang-btn.active { background: var(--sage-pale); border-color: var(--sage); opacity: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: rgba(249,247,244,0.9); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(107,127,106,0.12);
+  }
+  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; }
+  .nav-logo span { color: var(--sage); }
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--text-muted); transition: color 0.3s; }
+  .nav-links a:hover { color: var(--sage); }
+  .nav-cta { font-family: 'Jost', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.5rem; border: 1px solid var(--sage); color: var(--sage); text-decoration: none; transition: all 0.3s; background: transparent; }
+  .nav-cta:hover { background: var(--sage); color: white; }
+
+  /* HERO */
+  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 4rem; background: var(--mist); position: relative; z-index: 2; }
+  .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 2rem; }
+  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 4.5vw, 4.2rem); font-weight: 300; line-height: 1.15; color: var(--stone); margin-bottom: 2rem; }
+  .hero-title em { font-style: italic; color: var(--sage); }
+  .hero-body { font-size: 1rem; color: var(--text-muted); max-width: 400px; line-height: 1.9; margin-bottom: 3rem; }
+  .hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
+  .btn-primary { font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 1rem 2.2rem; background: var(--sage); color: white; text-decoration: none; transition: background 0.3s; border: none; cursor: pointer; }
+  .btn-primary:hover { background: #5a6e5a; }
+  .btn-ghost { font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; display: flex; align-items: center; gap: 0.5rem; }
+  .btn-ghost::after { content: '→'; transition: transform 0.3s; }
+  .btn-ghost:hover { color: var(--stone); }
+  .btn-ghost:hover::after { transform: translateX(4px); }
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-image-container { width: 100%; height: 100%; position: relative; background: linear-gradient(160deg, #d4dfc8 0%, #b0c4a0 40%, #8aac80 100%); }
+  .hero-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .hero-overlay-text { position: absolute; bottom: 3rem; right: 3rem; text-align: right; }
+  .hero-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(255,255,255,0.8); line-height: 1.6; max-width: 220px; }
+
+  /* INTRO */
+  .intro-band { background: var(--sage-pale); padding: 4rem; display: flex; justify-content: center; }
+  .intro-inner { max-width: 720px; text-align: center; }
+  .intro-inner p { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--stone); line-height: 1.7; }
+
+  /* SECTION */
+  .section { padding: 7rem 4rem; max-width: 1200px; margin: 0 auto; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 1rem; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; color: var(--stone); line-height: 1.2; margin-bottom: 1.5rem; }
+  .section-body { font-size: 0.95rem; color: var(--text-muted); max-width: 500px; line-height: 1.9; margin-bottom: 4rem; }
+
+  /* SERVICES */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(107,127,106,0.15); }
+  .service-card { background: var(--mist); padding: 2.5rem 2rem; transition: background 0.3s; }
+  .service-card:hover { background: var(--sage-pale); }
+  .service-icon { width: 36px; height: 36px; margin-bottom: 1.5rem; opacity: 0.6; }
+  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--stone); margin-bottom: 0.75rem; }
+  .service-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.9; }
+
+  /* PROCESS */
+  .how-section { background: var(--sand); padding: 7rem 4rem; }
+  .how-inner { max-width: 1100px; margin: 0 auto; }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; margin-top: 4rem; position: relative; }
+  .steps-grid::before { content: ''; position: absolute; top: 1.5rem; left: calc(12.5% + 1rem); right: calc(12.5% + 1rem); height: 1px; background: var(--sage-light); }
+  .step { text-align: center; }
+  .step-num { width: 3rem; height: 3rem; border-radius: 50%; background: var(--mist); border: 1px solid var(--sage-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--sage); position: relative; z-index: 1; }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--stone); margin-bottom: 0.6rem; }
+  .step-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
+
+  /* FOR WHOM */
+  .for-whom { padding: 7rem 4rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+  .for-whom-visual { height: 440px; overflow: hidden; }
+  .for-whom-text .section-body { margin-bottom: 2rem; }
+  .list-check { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
+  .list-check li { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+  .list-check li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--sage); margin-top: 0.55rem; flex-shrink: 0; }
+
+  /* TESTIMONIAL */
+  .testimonial-section { background: var(--stone); padding: 6rem 4rem; text-align: center; }
+  .testimonial-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.4rem, 2.5vw, 2rem); color: rgba(255,255,255,0.85); max-width: 780px; margin: 0 auto 2rem; line-height: 1.6; }
+  .testimonial-attr { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-light); }
+
+  /* LOCATIONS */
+  .locations-section { background: var(--sage-pale); padding: 5rem 4rem; }
+  .locations-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
+  .locations-list { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 3rem; }
+  .location-item { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--dusk); letter-spacing: 0.05em; }
+  .location-item .sub { display: block; font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); margin-top: 0.3rem; }
+
+  /* CONTACT */
+  .contact-section { padding: 7rem 4rem; max-width: 700px; margin: 0 auto; text-align: center; }
+  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 3rem; }
+  .contact-form input, .contact-form textarea { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.9rem; padding: 1rem 1.25rem; background: white; border: 1px solid rgba(107,127,106,0.25); color: var(--text); outline: none; transition: border-color 0.3s; resize: none; }
+  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--sage); }
+  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(107,127,106,0.5); font-size: 0.85rem; }
+  .contact-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .form-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.5rem; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid rgba(107,127,106,0.2); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--stone); letter-spacing: 0.1em; }
+  .footer-logo span { color: var(--sage); }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
+  .footer-links a:hover { color: var(--sage); }
+  .footer-copy { font-size: 0.78rem; color: var(--text-muted); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 50vw; min-height: 280px; }
+    .hero-left { padding: 7rem 1.5rem 3rem; }
+    .section { padding: 4rem 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .steps-grid::before { display: none; }
+    .for-whom { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
+    .for-whom-visual { height: 240px; }
+    .how-section, .locations-section, .testimonial-section, .intro-band { padding: 4rem 1.5rem; }
+    .contact-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body class="lang-en">
+
+<nav>
+  <a href="#" class="nav-logo">seren<span>as</span></a>
+  <ul class="nav-links">
+    <li><a href="#services"><span data-lang="en">Services</span><span data-lang="es">Servicios</span></a></li>
+    <li><a href="#process"><span data-lang="en">How it works</span><span data-lang="es">Cómo funciona</span></a></li>
+    <li><a href="#locations"><span data-lang="en">Locations</span><span data-lang="es">Lugares</span></a></li>
+    <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en')" title="English">
+        <svg width="22" height="16" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+          <rect width="22" height="16" fill="#012169"/>
+          <path d="M0,0 L22,16 M22,0 L0,16" stroke="#fff" stroke-width="3"/>
+          <path d="M0,0 L22,16 M22,0 L0,16" stroke="#C8102E" stroke-width="1.8"/>
+          <path d="M11,0 V16 M0,8 H22" stroke="#fff" stroke-width="4.5"/>
+          <path d="M11,0 V16 M0,8 H22" stroke="#C8102E" stroke-width="2.8"/>
+        </svg>
+      </button>
+      <button class="lang-btn" onclick="setLang('es')" title="Español">
+        <svg width="22" height="16" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
+          <rect width="22" height="16" fill="#c60b1e"/>
+          <rect y="4" width="22" height="8" fill="#ffc400"/>
+        </svg>
+      </button>
+    </div>
+    <a href="#contact" class="nav-cta">
+      <span data-lang="en">Begin</span><span data-lang="es">Empezar</span>
+    </a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">
+      <span data-lang="en">Ash Scattering · Spain</span>
+      <span data-lang="es">Dispersión de cenizas · España</span>
+    </p>
+    <h1 class="hero-title" data-lang="en">A <em>gentle return</em><br>to the land they loved</h1>
+    <h1 class="hero-title" data-lang="es">Un <em>regreso sereno</em><br>a la tierra que amaron</h1>
+    <p class="hero-body" data-lang="en">When you cannot be there in person, we carry out your loved one's final wishes — with presence, care, and quiet ceremony — in the landscapes, gardens, and hillsides of Spain they held dear.</p>
+    <p class="hero-body" data-lang="es">Cuando no puedes estar presente, nosotros cumplimos los últimos deseos de tu ser querido — con presencia, cuidado y ceremonia íntima — en los paisajes, jardines y colinas de España que tanto amaron.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <span data-lang="en">Arrange a service</span><span data-lang="es">Organizar un servicio</span>
+      </a>
+      <a href="#process" class="btn-ghost">
+        <span data-lang="en">How it works</span><span data-lang="es">Cómo funciona</span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image-container">
+      <svg class="hero-svg" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#e8ede0"/><stop offset="55%" stop-color="#cdd9bc"/><stop offset="100%" stop-color="#b0c49a"/>
+          </linearGradient>
+          <linearGradient id="h1G" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8aac70"/><stop offset="100%" stop-color="#6b8f58"/>
+          </linearGradient>
+          <linearGradient id="h2G" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#7a9e62"/><stop offset="100%" stop-color="#5a7a48"/>
+          </linearGradient>
+          <linearGradient id="h3G" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#9ab882"/><stop offset="100%" stop-color="#7a9e68"/>
+          </linearGradient>
+        </defs>
+        <rect width="600" height="700" fill="url(#skyG)"/>
+        <path d="M-20 420 Q80 370 180 390 Q280 410 380 375 Q480 340 620 380 L620 700 L-20 700 Z" fill="#c8d8b4" fill-opacity="0.6"/>
+        <path d="M-20 470 Q60 430 160 448 Q260 466 360 438 Q450 412 620 445 L620 700 L-20 700 Z" fill="url(#h3G)"/>
+        <path d="M-20 520 Q80 490 200 510 Q300 528 380 500 Q460 474 620 505 L620 700 L-20 700 Z" fill="url(#h2G)"/>
+        <path d="M-20 580 Q100 560 240 572 Q360 584 480 562 Q550 550 620 558 L620 700 L-20 700 Z" fill="url(#h1G)"/>
+        <rect x="-20" y="640" width="660" height="70" fill="#5a7a48"/>
+        <rect x="88" y="422" width="3" height="26" fill="#6b8f58" fill-opacity="0.5"/>
+        <ellipse cx="90" cy="418" rx="9" ry="13" fill="#6b8f58" fill-opacity="0.45"/>
+        <rect x="128" y="414" width="3" height="30" fill="#5a7a48" fill-opacity="0.5"/>
+        <ellipse cx="130" cy="409" rx="11" ry="15" fill="#5a7a48" fill-opacity="0.4"/>
+        <rect x="460" y="410" width="3" height="28" fill="#6b8f58" fill-opacity="0.45"/>
+        <ellipse cx="462" cy="405" rx="10" ry="14" fill="#6b8f58" fill-opacity="0.4"/>
+        <rect x="50" y="472" width="4" height="38" fill="#4a6a3a"/>
+        <ellipse cx="52" cy="465" rx="13" ry="17" fill="#4a6a3a"/>
+        <rect x="510" y="464" width="4" height="42" fill="#4a6a3a"/>
+        <ellipse cx="512" cy="456" rx="14" ry="19" fill="#4a6a3a"/>
+        <rect x="22" y="522" width="5" height="78" fill="#3a5a2c"/>
+        <ellipse cx="25" cy="512" rx="16" ry="23" fill="#3a5a2c"/>
+        <rect x="570" y="517" width="5" height="83" fill="#3a5a2c"/>
+        <ellipse cx="573" cy="506" rx="17" ry="24" fill="#3a5a2c"/>
+        <circle cx="200" cy="558" r="2" fill="white" fill-opacity="0.5"/>
+        <circle cx="310" cy="562" r="2" fill="white" fill-opacity="0.45"/>
+        <circle cx="420" cy="560" r="2" fill="white" fill-opacity="0.4"/>
+        <circle cx="160" cy="300" r="2" fill="white" fill-opacity="0.35"/>
+        <circle cx="250" cy="290" r="2.5" fill="white" fill-opacity="0.3"/>
+        <circle cx="340" cy="278" r="2" fill="white" fill-opacity="0.28"/>
+        <circle cx="430" cy="285" r="1.8" fill="white" fill-opacity="0.25"/>
+        <ellipse cx="300" cy="320" rx="200" ry="110" fill="white" fill-opacity="0.06"/>
+      </svg>
+      <div class="hero-overlay-text">
+        <p class="hero-quote" data-lang="en">"Return to the earth<br>they called home."</p>
+        <p class="hero-quote" data-lang="es">"Regresar a la tierra<br>que llamaron hogar."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="intro-band">
+  <div class="intro-inner">
+    <p data-lang="en">A Spain-based service for anyone who cannot be present — we carry out last wishes with dignity, care, and a personal touch, wherever in the world you are.</p>
+    <p data-lang="es">Un servicio con sede en España para quienes no pueden estar presentes — cumplimos los últimos deseos con dignidad, cuidado y atención personal, estés donde estés en el mundo.</p>
+  </div>
+</div>
+
+<section class="section" id="services">
+  <p class="section-label">
+    <span data-lang="en">Our services</span><span data-lang="es">Nuestros servicios</span>
+  </p>
+  <h2 class="section-title" data-lang="en">Every farewell,<br>thoughtfully arranged</h2>
+  <h2 class="section-title" data-lang="es">Cada despedida,<br>cuidadosamente organizada</h2>
+  <p class="section-body" data-lang="en">Choose the ceremony that feels right. All services include a personalised video recording and a written record of the scattering, sent to your family.</p>
+  <p class="section-body" data-lang="es">Elige la ceremonia que se sienta adecuada. Todos los servicios incluyen una grabación de vídeo personalizada y un registro escrito de la dispersión, enviados a tu familia.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 30 L18 16" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M18 16 Q14 10 10 8 Q14 14 18 16" stroke="#6b7f6a" stroke-width="1.2" fill="none"/>
+        <path d="M18 20 Q22 14 26 12 Q22 18 18 20" stroke="#6b7f6a" stroke-width="1.2" fill="none"/>
+        <path d="M6 30 Q18 27 30 30" stroke="#6b7f6a" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+      <h3 class="service-name">
+        <span data-lang="en">Garden & private land</span><span data-lang="es">Jardín y terreno privado</span>
+      </h3>
+      <p class="service-desc" data-lang="en">Scattered in a cherished private garden or meaningful outdoor space — with the landowner's permission and full care for the setting.</p>
+      <p class="service-desc" data-lang="es">Dispersadas en un jardín privado o lugar especial al aire libre — con el permiso del propietario y pleno cuidado del entorno.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 28 L12 10 L21 22 L26 16 L33 28 Z" stroke="#6b7f6a" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+        <path d="M8 28 Q9 26 10 25" stroke="#6b7f6a" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+      <h3 class="service-name">
+        <span data-lang="en">Nature scattering</span><span data-lang="es">Dispersión en la naturaleza</span>
+      </h3>
+      <p class="service-desc" data-lang="en">In a meaningful landscape — a hillside, a woodland, an open field — carried out quietly and fully in compliance with regional regulations.</p>
+      <p class="service-desc" data-lang="es">En un paisaje con significado — una ladera, un bosque, un campo abierto — realizado con tranquilidad y cumplimiento normativo regional.</p>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="14" width="6" height="18" rx="1" stroke="#6b7f6a" stroke-width="1.2" fill="none"/>
+        <path d="M18 14 C16 10 14 6 18 4 C22 6 20 10 18 14" stroke="#6b7f6a" stroke-width="1.2" fill="none"/>
+        <path d="M8 32 Q13 30 18 32 Q23 34 28 32" stroke="#6b7f6a" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+      <h3 class="service-name">
+        <span data-lang="en">Attended ceremony</span><span data-lang="es">Ceremonia presencial</span>
+      </h3>
+      <p class="service-desc" data-lang="en">A small, personal ceremony led by our team — with readings, flowers, and a moment of reflection — for families who want something more considered, even from afar.</p>
+      <p class="service-desc" data-lang="es">Una pequeña ceremonia personal dirigida por nuestro equipo — con lecturas, flores y un momento de reflexión — para quienes desean algo más íntimo, aunque sea desde lejos.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how-section" id="process">
+  <div class="how-inner">
+    <p class="section-label">
+      <span data-lang="en">The process</span><span data-lang="es">El proceso</span>
+    </p>
+    <h2 class="section-title" data-lang="en">Simple, clear, and guided at every step</h2>
+    <h2 class="section-title" data-lang="es">Sencillo, claro y acompañado en cada paso</h2>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-num">I</div>
+        <h4 class="step-title"><span data-lang="en">First contact</span><span data-lang="es">Primer contacto</span></h4>
+        <p class="step-desc" data-lang="en">Reach out by email or our contact form. We'll speak with you privately to understand your wishes, timeline, and any special requests.</p>
+        <p class="step-desc" data-lang="es">Escríbenos por correo o formulario. Hablaremos contigo en privado para entender tus deseos, plazos y cualquier solicitud especial.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">II</div>
+        <h4 class="step-title"><span data-lang="en">Ashes received</span><span data-lang="es">Recepción de las cenizas</span></h4>
+        <p class="step-desc" data-lang="en">We guide you through the process of sending the ashes to Spain, or coordinate with a local funeral director on your behalf.</p>
+        <p class="step-desc" data-lang="es">Te orientamos en el proceso de enviar las cenizas a España, o coordinamos con una funeraria local en tu nombre.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">III</div>
+        <h4 class="step-title"><span data-lang="en">The ceremony</span><span data-lang="es">La ceremonia</span></h4>
+        <p class="step-desc" data-lang="en">We carry out the ceremony according to your wishes — with care, full documentation, and a video recording sent to you privately.</p>
+        <p class="step-desc" data-lang="es">Realizamos la ceremonia según tus deseos — con cuidado, documentación completa y grabación de vídeo enviada en privado.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">IV</div>
+        <h4 class="step-title"><span data-lang="en">Certificate & closure</span><span data-lang="es">Certificado y cierre</span></h4>
+        <p class="step-desc" data-lang="en">You receive a written certificate with GPS coordinates, date, and a personal note — a lasting record for your family.</p>
+        <p class="step-desc" data-lang="es">Recibes un certificado escrito con coordenadas GPS, fecha y nota personal — un recuerdo duradero para tu familia.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="for-whom">
+    <div class="for-whom-visual">
+      <svg width="100%" height="100%" viewBox="0 0 460 440" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="fwG" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c4d8a8"/><stop offset="100%" stop-color="#a8c48a"/>
+          </linearGradient>
+        </defs>
+        <rect width="460" height="440" fill="url(#fwG)"/>
+        <path d="M0 300 Q115 260 230 280 Q345 300 460 265 L460 440 L0 440 Z" fill="#8aac70" fill-opacity="0.5"/>
+        <path d="M0 350 Q115 320 230 335 Q345 350 460 320 L460 440 L0 440 Z" fill="#6b8f58" fill-opacity="0.5"/>
+        <path d="M0 390 Q115 370 230 380 Q345 390 460 368 L460 440 L0 440 Z" fill="#4a6a3a" fill-opacity="0.6"/>
+        <rect x="80" y="282" width="3" height="28" fill="#4a6a3a" fill-opacity="0.5"/>
+        <ellipse cx="82" cy="276" rx="10" ry="14" fill="#4a6a3a" fill-opacity="0.45"/>
+        <rect x="340" y="270" width="3" height="32" fill="#3a5a2c" fill-opacity="0.5"/>
+        <ellipse cx="342" cy="263" rx="12" ry="16" fill="#3a5a2c" fill-opacity="0.45"/>
+        <circle cx="180" cy="370" r="2" fill="white" fill-opacity="0.4"/>
+        <circle cx="260" cy="362" r="1.5" fill="white" fill-opacity="0.35"/>
+        <circle cx="320" cy="375" r="2" fill="white" fill-opacity="0.38"/>
+        <ellipse cx="230" cy="220" rx="180" ry="90" fill="white" fill-opacity="0.08"/>
+      </svg>
+    </div>
+    <div class="for-whom-text">
+      <p class="section-label">
+        <span data-lang="en">Who we serve</span><span data-lang="es">A quién servimos</span>
+      </p>
+      <h2 class="section-title" data-lang="en">For anyone who cannot be there</h2>
+      <h2 class="section-title" data-lang="es">Para quienes no pueden estar presentes</h2>
+      <p class="section-body" data-lang="en">Distance, circumstance, or simply the absence of someone nearby to help — we are here for all of these. Wherever you are in the world, we make it possible.</p>
+      <p class="section-body" data-lang="es">La distancia, las circunstancias o simplemente la falta de alguien cercano — estamos aquí para todo eso. Estés donde estés en el mundo, lo hacemos posible.</p>
+      <ul class="list-check" data-lang="en">
+        <li>Families abroad whose loved one wished to be scattered in Spain</li>
+        <li>People living in Spain without family nearby to carry out their wishes</li>
+        <li>Individuals who have pre-arranged their own ceremony and want it guaranteed</li>
+        <li>Those who have lost a loved one in Spain and need local, trusted support</li>
+        <li>Funeral directors and estate lawyers seeking a reliable local partner</li>
+      </ul>
+      <ul class="list-check" data-lang="es">
+        <li>Familias en el extranjero cuyo ser querido deseaba ser dispersado en España</li>
+        <li>Personas en España sin familia cercana que pueda cumplir sus deseos</li>
+        <li>Quienes han organizado su propia ceremonia con antelación y quieren garantizarla</li>
+        <li>Quienes han perdido a un ser querido en España y necesitan apoyo local de confianza</li>
+        <li>Funerarias y abogados que buscan un socio local fiable en España</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial-section">
+  <p class="testimonial-text" data-lang="en">"We couldn't be there. Serenas scattered our mother's ashes in the olive grove she had walked every morning for twenty years — and sent us a video so we could watch together, from thousands of miles away."</p>
+  <p class="testimonial-text" data-lang="es">"No podíamos estar allí. Serenas dispersó las cenizas de nuestra madre en el olivar que recorrió cada mañana durante veinte años — y nos enviaron un vídeo para que pudiéramos verlo juntos, a miles de kilómetros de distancia."</p>
+  <p class="testimonial-attr" data-lang="en">— The Hartley family</p>
+  <p class="testimonial-attr" data-lang="es">— La familia Hartley</p>
+</section>
+
+<section class="locations-section" id="locations">
+  <div class="locations-inner">
+    <p class="section-label">
+      <span data-lang="en">Where we operate</span><span data-lang="es">Dónde operamos</span>
+    </p>
+    <h2 class="section-title" data-lang="en">Across Spain's landscapes</h2>
+    <h2 class="section-title" data-lang="es">Por los paisajes de España</h2>
+    <div class="locations-list">
+      <div class="location-item">Andalucía <span class="sub">Málaga · Granada · Sevilla</span></div>
+      <div class="location-item">Valencia <span class="sub"><span data-lang="en">Interior & countryside</span><span data-lang="es">Interior y campo</span></span></div>
+      <div class="location-item">Cataluña <span class="sub"><span data-lang="en">Pyrenees & inland</span><span data-lang="es">Pirineos e interior</span></span></div>
+      <div class="location-item">Galicia <span class="sub"><span data-lang="en">Green north</span><span data-lang="es">Norte verde</span></span></div>
+      <div class="location-item"><span data-lang="en">Canary Islands</span><span data-lang="es">Islas Canarias</span> <span class="sub"><span data-lang="en">Year-round</span><span data-lang="es">Todo el año</span></span></div>
+      <div class="location-item"><span data-lang="en">Balearic Islands</span><span data-lang="es">Islas Baleares</span> <span class="sub">Mallorca · Menorca</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact-section" id="contact">
+  <p class="section-label">
+    <span data-lang="en">Get in touch</span><span data-lang="es">Ponte en contacto</span>
+  </p>
+  <h2 class="section-title" data-lang="en">Begin with a conversation</h2>
+  <h2 class="section-title" data-lang="es">Comienza con una conversación</h2>
+  <p class="section-body" data-lang="en" style="margin: 0 auto 0.5rem; text-align: center;">There is no obligation. We will listen, guide you gently, and answer every question you have.</p>
+  <p class="section-body" data-lang="es" style="margin: 0 auto 0.5rem; text-align: center;">Sin compromiso. Te escucharemos, te orientaremos con delicadeza y responderemos todas tus preguntas.</p>
+  <form class="contact-form" onsubmit="return false;">
+    <div class="contact-row">
+      <input type="text" placeholder="Your name / Tu nombre">
+      <input type="email" placeholder="Email">
+    </div>
+    <input type="text" placeholder="Country / País">
+    <textarea rows="5" placeholder="Tell us about your situation / Cuéntanos tu situación"></textarea>
+    <button type="submit" class="btn-primary" style="align-self: flex-start;">
+      <span data-lang="en">Send message</span><span data-lang="es">Enviar mensaje</span>
+    </button>
+    <p class="form-note" data-lang="en">All enquiries are treated with complete privacy and discretion.</p>
+    <p class="form-note" data-lang="es">Todas las consultas se tratan con total privacidad y discreción.</p>
+  </form>
+</section>
+
+<footer>
+  <div class="footer-logo">seren<span>as</span></div>
+  <ul class="footer-links">
+    <li><a href="#services"><span data-lang="en">Services</span><span data-lang="es">Servicios</span></a></li>
+    <li><a href="#process"><span data-lang="en">Process</span><span data-lang="es">Proceso</span></a></li>
+    <li><a href="#locations"><span data-lang="en">Locations</span><span data-lang="es">Lugares</span></a></li>
+    <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
+  </ul>
+  <p class="footer-copy">© 2025 Serenas · Spain</p>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-btn').forEach(function(b) {
+      b.classList.toggle('active', b.getAttribute('title').toLowerCase() === (lang === 'en' ? 'english' : 'español'));
+    });
+  }
+</script>
+</body>
+</html>

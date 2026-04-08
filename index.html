@@ -1,3 +1,6 @@
+Serenas v2 · HTML
+Copy
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,496 +18,709 @@
   }
   html { scroll-behavior: smooth; }
   body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--mist); color: var(--text); line-height: 1.7; overflow-x: hidden; }
-
-  /* LANG */
+ 
+  /* ── LANG ── */
   [data-lang] { display: none; }
-  body.lang-en [data-lang="en"],
-  body.lang-es [data-lang="es"] { display: revert; }
-  span[data-lang], a[data-lang], p[data-lang], h1[data-lang], h2[data-lang], h4[data-lang], li[data-lang], ul[data-lang] { display: none; }
-  body.lang-en span[data-lang="en"], body.lang-en a[data-lang="en"],
-  body.lang-en p[data-lang="en"], body.lang-en h1[data-lang="en"],
-  body.lang-en h2[data-lang="en"], body.lang-en h4[data-lang="en"],
-  body.lang-en li[data-lang="en"], body.lang-en ul[data-lang="en"] { display: revert; }
-  body.lang-es span[data-lang="es"], body.lang-es a[data-lang="es"],
-  body.lang-es p[data-lang="es"], body.lang-es h1[data-lang="es"],
-  body.lang-es h2[data-lang="es"], body.lang-es h4[data-lang="es"],
-  body.lang-es li[data-lang="es"], body.lang-es ul[data-lang="es"] { display: revert; }
-  /* nav links always show */
-  .nav-links li { display: list-item !important; }
-  /* inline spans inside always-visible elements */
-  .nav-links a span[data-lang], .hero-eyebrow span[data-lang],
-  .section-label span[data-lang], .location-item span[data-lang],
-  .service-name span[data-lang], .step-title span[data-lang] { display: none; }
-  body.lang-en .nav-links a span[data-lang="en"],
-  body.lang-en .hero-eyebrow span[data-lang="en"],
-  body.lang-en .section-label span[data-lang="en"],
-  body.lang-en .location-item span[data-lang="en"],
-  body.lang-en .service-name span[data-lang="en"],
-  body.lang-en .step-title span[data-lang="en"] { display: inline; }
-  body.lang-es .nav-links a span[data-lang="es"],
-  body.lang-es .hero-eyebrow span[data-lang="es"],
-  body.lang-es .section-label span[data-lang="es"],
-  body.lang-es .location-item span[data-lang="es"],
-  body.lang-es .service-name span[data-lang="es"],
-  body.lang-es .step-title span[data-lang="es"] { display: inline; }
-
-  /* LANG TOGGLE */
-  .lang-toggle { display: flex; }
-  .lang-btn {
-    font-size: 1.1rem;
-    padding: 0.3rem 0.5rem;
-    border: 1px solid rgba(107,127,106,0.35); background: transparent;
-    cursor: pointer; transition: all 0.2s;
-    line-height: 0;
-    opacity: 0.55;
-    display: flex; align-items: center;
+  body.lang-en [data-lang="en"], body.lang-es [data-lang="es"] { display: revert; }
+  span[data-lang], p[data-lang], h1[data-lang], h2[data-lang], h3[data-lang],
+  h4[data-lang], li[data-lang], ul[data-lang], div[data-lang], td[data-lang], th[data-lang] { display: none; }
+  body.lang-en span[data-lang="en"], body.lang-en p[data-lang="en"], body.lang-en h1[data-lang="en"],
+  body.lang-en h2[data-lang="en"], body.lang-en h3[data-lang="en"], body.lang-en h4[data-lang="en"],
+  body.lang-en li[data-lang="en"], body.lang-en ul[data-lang="en"], body.lang-en div[data-lang="en"],
+  body.lang-en td[data-lang="en"], body.lang-en th[data-lang="en"] { display: revert; }
+  body.lang-es span[data-lang="es"], body.lang-es p[data-lang="es"], body.lang-es h1[data-lang="es"],
+  body.lang-es h2[data-lang="es"], body.lang-es h3[data-lang="es"], body.lang-es h4[data-lang="es"],
+  body.lang-es li[data-lang="es"], body.lang-es ul[data-lang="es"], body.lang-es div[data-lang="es"],
+  body.lang-es td[data-lang="es"], body.lang-es th[data-lang="es"] { display: revert; }
+  /* always-visible inline text toggles */
+  .sec-tab span[data-lang], .logo span[data-lang] { display: none; }
+  body.lang-en .sec-tab span[data-lang="en"], body.lang-en .logo span[data-lang="en"] { display: inline; }
+  body.lang-es .sec-tab span[data-lang="es"], body.lang-es .logo span[data-lang="es"] { display: inline; }
+ 
+  /* ── TOP CHROME ── */
+  .chrome {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    background: rgba(249,247,244,0.96); backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(107,127,106,0.14);
   }
+ 
+  /* row 1: logo + lang */
+  .chrome-top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.9rem 3rem;
+    border-bottom: 1px solid rgba(107,127,106,0.08);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+    font-weight: 300; letter-spacing: 0.14em; color: var(--stone); text-decoration: none;
+  }
+  .logo em { color: var(--sage); font-style: normal; }
+  .chrome-right { display: flex; align-items: center; gap: 1.5rem; }
+  .lang-toggle { display: flex; }
+  .lang-btn { font-size: 1.05rem; padding: 0.28rem 0.48rem; border: 1px solid rgba(107,127,106,0.3); background: transparent; cursor: pointer; line-height: 0; opacity: 0.5; display: flex; align-items: center; transition: all 0.2s; }
   .lang-btn:first-child { border-right: none; }
   .lang-btn.active { background: var(--sage-pale); border-color: var(--sage); opacity: 1; }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 1.5rem 4rem;
-    background: rgba(249,247,244,0.9); backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(107,127,106,0.12);
+  .contact-link { font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.5rem 1.2rem; border: 1px solid var(--sage); color: var(--sage); text-decoration: none; transition: all 0.25s; }
+  .contact-link:hover { background: var(--sage); color: white; }
+ 
+  /* row 2: section tabs */
+  .sec-nav {
+    display: flex; align-items: stretch;
+    overflow-x: auto; scrollbar-width: none;
   }
-  .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; letter-spacing: 0.12em; color: var(--stone); text-decoration: none; }
-  .nav-logo span { color: var(--sage); }
-  .nav-right { display: flex; align-items: center; gap: 2rem; }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-  .nav-links a { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; color: var(--text-muted); transition: color 0.3s; }
-  .nav-links a:hover { color: var(--sage); }
-  .nav-cta { font-family: 'Jost', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.6rem 1.5rem; border: 1px solid var(--sage); color: var(--sage); text-decoration: none; transition: all 0.3s; background: transparent; }
-  .nav-cta:hover { background: var(--sage); color: white; }
-
-  /* HERO */
-  .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; }
-  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 8rem 4rem 4rem; background: var(--mist); position: relative; z-index: 2; }
-  .hero-eyebrow { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 2rem; }
-  .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 4.5vw, 4.2rem); font-weight: 300; line-height: 1.15; color: var(--stone); margin-bottom: 2rem; }
-  .hero-title em { font-style: italic; color: var(--sage); }
-  .hero-body { font-size: 1rem; color: var(--text-muted); max-width: 400px; line-height: 1.9; margin-bottom: 3rem; }
-  .hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap; }
-  .btn-primary { font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 1rem 2.2rem; background: var(--sage); color: white; text-decoration: none; transition: background 0.3s; border: none; cursor: pointer; }
-  .btn-primary:hover { background: #5a6e5a; }
-  .btn-ghost { font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; display: flex; align-items: center; gap: 0.5rem; }
-  .btn-ghost::after { content: '→'; transition: transform 0.3s; }
-  .btn-ghost:hover { color: var(--stone); }
-  .btn-ghost:hover::after { transform: translateX(4px); }
-  .hero-right { position: relative; overflow: hidden; }
-  .hero-image-container { width: 100%; height: 100%; position: relative; background: linear-gradient(160deg, #d4dfc8 0%, #b0c4a0 40%, #8aac80 100%); }
-  .hero-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-  .hero-overlay-text { position: absolute; bottom: 3rem; right: 3rem; text-align: right; }
-  .hero-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.2rem; color: rgba(255,255,255,0.8); line-height: 1.6; max-width: 220px; }
-
-  /* INTRO */
-  .intro-band { background: var(--sage-pale); padding: 4rem; display: flex; justify-content: center; }
-  .intro-inner { max-width: 720px; text-align: center; }
-  .intro-inner p { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; color: var(--stone); line-height: 1.7; }
-
-  /* SECTION */
-  .section { padding: 7rem 4rem; max-width: 1200px; margin: 0 auto; }
-  .section-label { font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 1rem; }
-  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; color: var(--stone); line-height: 1.2; margin-bottom: 1.5rem; }
-  .section-body { font-size: 0.95rem; color: var(--text-muted); max-width: 500px; line-height: 1.9; margin-bottom: 4rem; }
-
-  /* SERVICES */
-  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(107,127,106,0.15); }
-  .service-card { background: var(--mist); padding: 2.5rem 2rem; transition: background 0.3s; }
-  .service-card:hover { background: var(--sage-pale); }
-  .service-icon { width: 36px; height: 36px; margin-bottom: 1.5rem; opacity: 0.6; }
-  .service-name { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--stone); margin-bottom: 0.75rem; }
-  .service-desc { font-size: 0.88rem; color: var(--text-muted); line-height: 1.9; }
-
-  /* PROCESS */
-  .how-section { background: var(--sand); padding: 7rem 4rem; }
-  .how-inner { max-width: 1100px; margin: 0 auto; }
-  .steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; margin-top: 4rem; position: relative; }
-  .steps-grid::before { content: ''; position: absolute; top: 1.5rem; left: calc(10% + 1rem); right: calc(10% + 1rem); height: 1px; background: var(--sage-light); }
+  .sec-nav::-webkit-scrollbar { display: none; }
+  .sec-tab {
+    flex: 1; min-width: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 0.75rem 1rem;
+    font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-muted);
+    cursor: pointer; border: none; background: transparent;
+    border-right: 1px solid rgba(107,127,106,0.1);
+    border-bottom: 2px solid transparent;
+    transition: all 0.25s; white-space: nowrap; position: relative;
+    text-align: center; line-height: 1.3;
+  }
+  .sec-tab:last-child { border-right: none; }
+  .sec-tab .tab-num { font-family: 'Cormorant Garamond', serif; font-size: 0.65rem; color: var(--sage-light); margin-bottom: 0.2rem; letter-spacing: 0.15em; }
+  .sec-tab:hover { background: var(--sage-pale); color: var(--stone); }
+  .sec-tab.active { color: var(--stone); border-bottom-color: var(--sage); background: var(--sage-pale); }
+  .sec-tab.active .tab-num { color: var(--sage); }
+  .diy-hint {
+    font-size: 0.58rem; color: var(--sage); letter-spacing: 0.05em;
+    text-transform: none; font-style: italic; margin-top: 0.15rem;
+    white-space: nowrap; font-family: 'Cormorant Garamond', serif;
+  }
+ 
+  /* ── CONTENT PANELS ── */
+  .panels { padding-top: 110px; min-height: 100vh; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+ 
+  /* shared section styles */
+  .s-wrap { max-width: 1100px; margin: 0 auto; padding: 5rem 3rem; }
+  .s-eyebrow { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 1rem; }
+  .s-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 300; color: var(--stone); line-height: 1.15; margin-bottom: 1.25rem; }
+  .s-title em { font-style: italic; color: var(--sage); }
+  .s-body { font-size: 0.92rem; color: var(--text-muted); line-height: 1.95; max-width: 560px; margin-bottom: 3rem; }
+  .s-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.6rem; }
+ 
+  /* ══════════════════════════════
+     PANEL 1 — BLOG
+  ══════════════════════════════ */
+  #panel-blog { background: var(--mist); }
+  .blog-hero { background: var(--stone); padding: 5rem 3rem 4rem; }
+  .blog-hero-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: end; }
+  .blog-hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 300; color: white; line-height: 1.1; margin-bottom: 1rem; }
+  .blog-hero-title em { color: var(--sage-light); font-style: italic; }
+  .blog-hero-body { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.9; }
+  .blog-grid { max-width: 1100px; margin: 0 auto; padding: 4rem 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(107,127,106,0.12); }
+  .blog-card { background: var(--mist); padding: 2rem 1.75rem; transition: background 0.3s; cursor: pointer; }
+  .blog-card:hover { background: var(--sage-pale); }
+  .blog-tag { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.9rem; }
+  .blog-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--stone); line-height: 1.3; margin-bottom: 0.6rem; }
+  .blog-excerpt { font-size: 0.82rem; color: var(--text-muted); line-height: 1.85; margin-bottom: 1.2rem; }
+  .blog-read { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage); text-decoration: none; }
+  .blog-read::after { content: ' →'; }
+  .blog-featured { grid-column: span 2; background: var(--sand); }
+  .blog-featured .blog-title { font-size: 1.5rem; }
+ 
+  /* ══════════════════════════════
+     PANEL 2 — ADMIN
+  ══════════════════════════════ */
+  #panel-admin { background: var(--sand); }
+  .admin-hero { padding: 5rem 3rem 4rem; max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .task-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(107,127,106,0.12); margin: 0 3rem 0; max-width: 1100px; margin-left: auto; margin-right: auto; }
+  .task-card { background: var(--mist); padding: 2rem 1.75rem; }
+  .task-num { font-family: 'Cormorant Garamond', serif; font-size: 0.85rem; color: var(--sage-light); margin-bottom: 0.8rem; }
+  .task-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--stone); margin-bottom: 0.5rem; }
+  .task-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.85; }
+  .included-strip { background: var(--stone); margin-top: 4rem; padding: 4rem 3rem; }
+  .included-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .inc-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 300; color: white; line-height: 1.25; margin-bottom: 1rem; }
+  .inc-title em { font-style: italic; color: var(--sage-light); }
+  .inc-body { font-size: 0.86rem; color: rgba(255,255,255,0.5); line-height: 1.9; margin-bottom: 1.5rem; }
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .checklist li { display: flex; gap: 0.8rem; align-items: flex-start; font-size: 0.84rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
+  .chk { width: 14px; height: 14px; flex-shrink: 0; margin-top: 0.25rem; }
+ 
+  /* ══════════════════════════════
+     PANEL 3 — SCATTERING SERVICES
+  ══════════════════════════════ */
+  #panel-services { background: var(--mist); }
+  .services-hero { min-height: 42vh; display: grid; grid-template-columns: 1fr 1fr; }
+  .services-hero-left { padding: 5rem 3rem 4rem; display: flex; flex-direction: column; justify-content: center; background: var(--mist); }
+  .services-hero-right { position: relative; overflow: hidden; background: linear-gradient(160deg,#d4dfc8,#b0c4a0,#8aac80); }
+  .landscape-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .svc-grid { max-width: 1100px; margin: 0 auto; padding: 4rem 3rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(107,127,106,0.12); }
+  .svc-card { background: var(--mist); padding: 2.25rem 1.75rem; transition: background 0.3s; }
+  .svc-card:hover { background: var(--sage-pale); }
+  .svc-icon { width: 32px; height: 32px; margin-bottom: 1.2rem; opacity: 0.55; }
+  .svc-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--stone); margin-bottom: 0.6rem; }
+  .svc-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.9; }
+  .steps-band { background: var(--sand); padding: 4rem 3rem; }
+  .steps-inner { max-width: 1100px; margin: 0 auto; }
+  .steps-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; margin-top: 3rem; position: relative; }
+  .steps-row::before { content: ''; position: absolute; top: 1.4rem; left: calc(10% + 0.75rem); right: calc(10% + 0.75rem); height: 1px; background: var(--sage-light); }
   .step { text-align: center; }
-  .step-num { width: 3rem; height: 3rem; border-radius: 50%; background: var(--mist); border: 1px solid var(--sage-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--sage); position: relative; z-index: 1; }
-  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--stone); margin-bottom: 0.6rem; }
-  .step-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.8; }
-
-  /* FOR WHOM */
-  .for-whom { padding: 7rem 4rem; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
-  .for-whom-visual { height: 440px; overflow: hidden; }
-  .for-whom-text .section-body { margin-bottom: 2rem; }
-  .list-check { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
-  .list-check li { display: flex; gap: 0.75rem; align-items: flex-start; font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
-  .list-check li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--sage); margin-top: 0.55rem; flex-shrink: 0; }
-
-  /* TESTIMONIAL */
-  .testimonial-section { background: var(--stone); padding: 6rem 4rem; text-align: center; }
-  .testimonial-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.4rem, 2.5vw, 2rem); color: rgba(255,255,255,0.85); max-width: 780px; margin: 0 auto 2rem; line-height: 1.6; }
-  .testimonial-attr { font-size: 0.8rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-light); }
-
-  /* LOCATIONS */
-  .locations-section { background: var(--sage-pale); padding: 5rem 4rem; }
+  .step-num { width: 2.8rem; height: 2.8rem; border-radius: 50%; background: var(--mist); border: 1px solid var(--sage-light); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; color: var(--sage); position: relative; z-index: 1; }
+  .step-title { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: var(--stone); margin-bottom: 0.4rem; }
+  .step-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.8; }
+  .locations-band { padding: 4rem 3rem; }
   .locations-inner { max-width: 1100px; margin: 0 auto; text-align: center; }
-  .locations-list { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 3rem; }
-  .location-item { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--dusk); letter-spacing: 0.05em; }
-  .location-item .sub { display: block; font-family: 'Jost', sans-serif; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); margin-top: 0.3rem; }
-
-  /* CONTACT */
-  .contact-section { padding: 7rem 4rem; max-width: 700px; margin: 0 auto; text-align: center; }
-  .contact-form { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 3rem; }
-  .contact-form input, .contact-form textarea { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 0.9rem; padding: 1rem 1.25rem; background: white; border: 1px solid rgba(107,127,106,0.25); color: var(--text); outline: none; transition: border-color 0.3s; resize: none; }
-  .contact-form input:focus, .contact-form textarea:focus { border-color: var(--sage); }
-  .contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(107,127,106,0.5); font-size: 0.85rem; }
-  .contact-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-  .form-note { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.5rem; }
-
-  /* FOOTER */
-  footer { border-top: 1px solid rgba(107,127,106,0.2); padding: 3rem 4rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--stone); letter-spacing: 0.1em; }
-  .footer-logo span { color: var(--sage); }
-  .footer-links { display: flex; gap: 2rem; list-style: none; }
-  .footer-links a { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
-  .footer-links a:hover { color: var(--sage); }
-  .footer-copy { font-size: 0.78rem; color: var(--text-muted); }
-
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
-    nav { padding: 1.2rem 1.5rem; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-right { height: 50vw; min-height: 280px; }
-    .hero-left { padding: 7rem 1.5rem 3rem; }
-    .section { padding: 4rem 1.5rem; }
-    .services-grid { grid-template-columns: 1fr; }
-    .steps-grid { grid-template-columns: 1fr 1fr; }
-    .steps-grid::before { display: none; }
-    .for-whom { grid-template-columns: 1fr; gap: 3rem; padding: 4rem 1.5rem; }
-    .for-whom-visual { height: 240px; }
-    .how-section, .locations-section, .testimonial-section, .intro-band { padding: 4rem 1.5rem; }
-    .contact-row { grid-template-columns: 1fr; }
-    footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+  .locations-list { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; margin-top: 2.5rem; }
+  .location-item { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--dusk); }
+  .location-item .sub { display: block; font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); margin-top: 0.25rem; }
+ 
+  /* ══════════════════════════════
+     PANEL 4 — DIY GUIDE
+  ══════════════════════════════ */
+  #panel-diy { background: var(--mist); }
+  .diy-hero { background: var(--stone); padding: 5rem 3rem 4rem; }
+  .diy-hero-inner { max-width: 1100px; margin: 0 auto; }
+  .diy-hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: end; margin-top: 2rem; }
+  .diy-warning { background: rgba(107,127,106,0.15); border-left: 2px solid var(--sage-light); padding: 1.5rem 1.75rem; margin-top: 2rem; }
+  .diy-warning-title { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--sage-light); margin-bottom: 0.5rem; font-style: italic; }
+  .diy-warning-body { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.85; }
+  .diy-cta { display: inline-block; margin-top: 1rem; font-family: 'Jost', sans-serif; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.7rem 1.6rem; border: 1px solid var(--sage-light); color: var(--sage-light); text-decoration: none; transition: all 0.25s; cursor: pointer; background: transparent; }
+  .diy-cta:hover { background: var(--sage); border-color: var(--sage); color: white; }
+  .guide-steps { max-width: 1100px; margin: 0 auto; padding: 4rem 3rem; }
+  .guide-step { display: grid; grid-template-columns: 80px 1fr; gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid rgba(107,127,106,0.12); }
+  .guide-step:last-child { border-bottom: none; }
+  .guide-step-num { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; font-weight: 300; color: var(--sage-light); line-height: 1; padding-top: 0.2rem; }
+  .guide-step-content {}
+  .guide-step-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--stone); margin-bottom: 0.6rem; }
+  .guide-step-body { font-size: 0.86rem; color: var(--text-muted); line-height: 1.9; max-width: 620px; }
+  .guide-step-note { margin-top: 0.75rem; padding: 0.8rem 1.1rem; background: var(--sage-pale); border-left: 2px solid var(--sage); font-size: 0.78rem; color: var(--text-muted); line-height: 1.8; font-style: italic; }
+  .diy-bottom-cta { background: var(--sage); padding: 4rem 3rem; text-align: center; }
+  .diy-bottom-cta-inner { max-width: 700px; margin: 0 auto; }
+  .diy-bottom-cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 2.5vw, 2.4rem); font-weight: 300; color: white; line-height: 1.2; margin-bottom: 1rem; }
+  .diy-bottom-cta h2 em { font-style: italic; color: rgba(255,255,255,0.7); }
+  .diy-bottom-cta p { font-size: 0.88rem; color: rgba(255,255,255,0.7); line-height: 1.9; margin-bottom: 2rem; }
+  .btn-white { font-family: 'Jost', sans-serif; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.9rem 2rem; background: white; color: var(--sage); text-decoration: none; transition: all 0.25s; display: inline-block; border: none; cursor: pointer; }
+  .btn-white:hover { background: var(--stone); color: white; }
+ 
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid rgba(107,127,106,0.15); padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; background: var(--mist); }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: var(--stone); letter-spacing: 0.1em; }
+  .footer-logo em { color: var(--sage); font-style: normal; }
+  .footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+ 
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    .chrome-top { padding: 0.8rem 1.2rem; }
+    .sec-tab { font-size: 0.62rem; padding: 0.65rem 0.6rem; }
+    .diy-hint { display: none; }
+    .panels { padding-top: 100px; }
+    .blog-hero-inner, .admin-hero, .services-hero, .diy-hero-grid, .included-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .blog-grid, .task-grid, .svc-grid { grid-template-columns: 1fr; }
+    .blog-featured { grid-column: span 1; }
+    .steps-row { grid-template-columns: 1fr 1fr; }
+    .steps-row::before { display: none; }
+    .s-wrap, .blog-grid, .svc-grid, .guide-steps, .locations-band, .steps-band { padding: 3rem 1.5rem; }
+    .blog-hero, .diy-hero, .admin-hero, .included-strip { padding: 3rem 1.5rem; }
+    .services-hero { grid-template-columns: 1fr; }
+    .services-hero-right { height: 220px; }
+    .guide-step { grid-template-columns: 50px 1fr; gap: 1rem; }
+    .guide-step-num { font-size: 2rem; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
 <body class="lang-en">
-
-<nav>
-  <a href="#" class="nav-logo">seren<span>as</span></a>
-  <ul class="nav-links">
-    <li><a href="#services"><span data-lang="en">Services</span><span data-lang="es">Servicios</span></a></li>
-    <li><a href="#process"><span data-lang="en">How it works</span><span data-lang="es">Cómo funciona</span></a></li>
-    <li><a href="#locations"><span data-lang="en">Locations</span><span data-lang="es">Lugares</span></a></li>
-    <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="lang-toggle">
-      <button class="lang-btn active" onclick="setLang('en')" title="English">
-        <svg width="22" height="16" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
-          <rect width="22" height="16" fill="#012169"/>
-          <path d="M0,0 L22,16 M22,0 L0,16" stroke="#fff" stroke-width="3"/>
-          <path d="M0,0 L22,16 M22,0 L0,16" stroke="#C8102E" stroke-width="1.8"/>
-          <path d="M11,0 V16 M0,8 H22" stroke="#fff" stroke-width="4.5"/>
-          <path d="M11,0 V16 M0,8 H22" stroke="#C8102E" stroke-width="2.8"/>
-        </svg>
-      </button>
-      <button class="lang-btn" onclick="setLang('es')" title="Español">
-        <svg width="22" height="16" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg">
-          <rect width="22" height="16" fill="#c60b1e"/>
-          <rect y="4" width="22" height="8" fill="#ffc400"/>
-        </svg>
-      </button>
-    </div>
-    <a href="#contact" class="nav-cta">
-      <span data-lang="en">Begin</span><span data-lang="es">Empezar</span>
-    </a>
-  </div>
-</nav>
-
-<section class="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow">
-      <span data-lang="en">Ash Scattering · Spain</span>
-      <span data-lang="es">Dispersión de cenizas · España</span>
-    </p>
-    <h1 class="hero-title" data-lang="en">A <em>gentle return</em><br>to the land they loved</h1>
-    <h1 class="hero-title" data-lang="es">Un <em>regreso sereno</em><br>a la tierra que amaron</h1>
-    <p class="hero-body" data-lang="en">When you cannot be there in person, we carry out your loved one's final wishes — with presence, care, and quiet ceremony — in the landscapes, gardens, and hillsides of Spain they held dear.</p>
-    <p class="hero-body" data-lang="es">Cuando no puedes estar presente, nosotros cumplimos los últimos deseos de tu ser querido — con presencia, cuidado y ceremonia íntima — en los paisajes, jardines y colinas de España que tanto amaron.</p>
-    <div class="hero-actions">
-      <a href="#contact" class="btn-primary">
-        <span data-lang="en">Arrange a service</span><span data-lang="es">Organizar un servicio</span>
-      </a>
-      <a href="#process" class="btn-ghost">
-        <span data-lang="en">How it works</span><span data-lang="es">Cómo funciona</span>
+ 
+<!-- ── TOP CHROME ── -->
+<header class="chrome">
+  <div class="chrome-top">
+    <a class="logo" href="#">seren<em>as</em></a>
+    <div class="chrome-right">
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('en')" title="English">
+          <svg width="20" height="14" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect width="22" height="16" fill="#012169"/><path d="M0,0 L22,16 M22,0 L0,16" stroke="#fff" stroke-width="3"/><path d="M0,0 L22,16 M22,0 L0,16" stroke="#C8102E" stroke-width="1.8"/><path d="M11,0 V16 M0,8 H22" stroke="#fff" stroke-width="4.5"/><path d="M11,0 V16 M0,8 H22" stroke="#C8102E" stroke-width="2.8"/></svg>
+        </button>
+        <button class="lang-btn" onclick="setLang('es')" title="Español">
+          <svg width="20" height="14" viewBox="0 0 22 16" xmlns="http://www.w3.org/2000/svg"><rect width="22" height="16" fill="#c60b1e"/><rect y="4" width="22" height="8" fill="#ffc400"/></svg>
+        </button>
+      </div>
+      <a href="#" onclick="showPanel('services'); showContact(); return false;" class="contact-link">
+        <span data-lang="en">Get in touch</span><span data-lang="es">Contactar</span>
       </a>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-image-container">
-      <svg class="hero-svg" viewBox="0 0 600 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="skyG" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#e8ede0"/><stop offset="55%" stop-color="#cdd9bc"/><stop offset="100%" stop-color="#b0c49a"/>
-          </linearGradient>
-          <linearGradient id="h1G" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#8aac70"/><stop offset="100%" stop-color="#6b8f58"/>
-          </linearGradient>
-          <linearGradient id="h2G" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#7a9e62"/><stop offset="100%" stop-color="#5a7a48"/>
-          </linearGradient>
-          <linearGradient id="h3G" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#9ab882"/><stop offset="100%" stop-color="#7a9e68"/>
-          </linearGradient>
-        </defs>
-        <rect width="600" height="700" fill="url(#skyG)"/>
-        <path d="M-20 420 Q80 370 180 390 Q280 410 380 375 Q480 340 620 380 L620 700 L-20 700 Z" fill="#c8d8b4" fill-opacity="0.6"/>
-        <path d="M-20 470 Q60 430 160 448 Q260 466 360 438 Q450 412 620 445 L620 700 L-20 700 Z" fill="url(#h3G)"/>
-        <path d="M-20 520 Q80 490 200 510 Q300 528 380 500 Q460 474 620 505 L620 700 L-20 700 Z" fill="url(#h2G)"/>
-        <path d="M-20 580 Q100 560 240 572 Q360 584 480 562 Q550 550 620 558 L620 700 L-20 700 Z" fill="url(#h1G)"/>
-        <rect x="-20" y="640" width="660" height="70" fill="#5a7a48"/>
-        <rect x="88" y="422" width="3" height="26" fill="#6b8f58" fill-opacity="0.5"/>
-        <ellipse cx="90" cy="418" rx="9" ry="13" fill="#6b8f58" fill-opacity="0.45"/>
-        <rect x="128" y="414" width="3" height="30" fill="#5a7a48" fill-opacity="0.5"/>
-        <ellipse cx="130" cy="409" rx="11" ry="15" fill="#5a7a48" fill-opacity="0.4"/>
-        <rect x="460" y="410" width="3" height="28" fill="#6b8f58" fill-opacity="0.45"/>
-        <ellipse cx="462" cy="405" rx="10" ry="14" fill="#6b8f58" fill-opacity="0.4"/>
-        <rect x="50" y="472" width="4" height="38" fill="#4a6a3a"/>
-        <ellipse cx="52" cy="465" rx="13" ry="17" fill="#4a6a3a"/>
-        <rect x="510" y="464" width="4" height="42" fill="#4a6a3a"/>
-        <ellipse cx="512" cy="456" rx="14" ry="19" fill="#4a6a3a"/>
-        <rect x="22" y="522" width="5" height="78" fill="#3a5a2c"/>
-        <ellipse cx="25" cy="512" rx="16" ry="23" fill="#3a5a2c"/>
-        <rect x="570" y="517" width="5" height="83" fill="#3a5a2c"/>
-        <ellipse cx="573" cy="506" rx="17" ry="24" fill="#3a5a2c"/>
-        <circle cx="200" cy="558" r="2" fill="white" fill-opacity="0.5"/>
-        <circle cx="310" cy="562" r="2" fill="white" fill-opacity="0.45"/>
-        <circle cx="420" cy="560" r="2" fill="white" fill-opacity="0.4"/>
-        <circle cx="160" cy="300" r="2" fill="white" fill-opacity="0.35"/>
-        <circle cx="250" cy="290" r="2.5" fill="white" fill-opacity="0.3"/>
-        <circle cx="340" cy="278" r="2" fill="white" fill-opacity="0.28"/>
-        <circle cx="430" cy="285" r="1.8" fill="white" fill-opacity="0.25"/>
-        <ellipse cx="300" cy="320" rx="200" ry="110" fill="white" fill-opacity="0.06"/>
-      </svg>
-      <div class="hero-overlay-text">
-        <p class="hero-quote" data-lang="en">"Return to the earth<br>they called home."</p>
-        <p class="hero-quote" data-lang="es">"Regresar a la tierra<br>que llamaron hogar."</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="intro-band">
-  <div class="intro-inner">
-    <p data-lang="en">A Spain-based service for anyone who cannot be present — we carry out last wishes with dignity, care, and a personal touch, wherever in the world you are.</p>
-    <p data-lang="es">Un servicio con sede en España para quienes no pueden estar presentes — cumplimos los últimos deseos con dignidad, cuidado y atención personal, estés donde estés en el mundo.</p>
-  </div>
-</div>
-
-<section class="section" id="services">
-  <p class="section-label">
-    <span data-lang="en">Our services</span><span data-lang="es">Nuestros servicios</span>
-  </p>
-  <h2 class="section-title" data-lang="en">Every farewell,<br>thoughtfully arranged</h2>
-  <h2 class="section-title" data-lang="es">Cada despedida,<br>cuidadosamente organizada</h2>
-  <p class="section-body" data-lang="en">Choose the ceremony that feels right. All services include a personalised video recording and a written record of the scattering, sent to your family.</p>
-  <p class="section-body" data-lang="es">Elige la ceremonia que se sienta adecuada. Todos los servicios incluyen una grabación de vídeo personalizada y un registro escrito de la dispersión, enviados a tu familia.</p>
-
-  <div class="services-grid">
-    <div class="service-card">
-      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M18 30 L18 16" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round"/>
-        <path d="M18 16 Q14 10 10 8 Q14 14 18 16" stroke="#6b7f6a" stroke-width="1.2" fill="none"/>
-        <path d="M18 20 Q22 14 26 12 Q22 18 18 20" stroke="#6b7f6a" stroke-width="1.2" fill="none"/>
-        <path d="M6 30 Q18 27 30 30" stroke="#6b7f6a" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
-      </svg>
-      <h3 class="service-name">
-        <span data-lang="en">Garden & private land</span><span data-lang="es">Jardín y terreno privado</span>
-      </h3>
-      <p class="service-desc" data-lang="en">Scattered in a cherished private garden or meaningful outdoor space — with the landowner's permission and full care for the setting.</p>
-      <p class="service-desc" data-lang="es">Dispersadas en un jardín privado o lugar especial al aire libre — con el permiso del propietario y pleno cuidado del entorno.</p>
-    </div>
-    <div class="service-card">
-      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M3 28 L12 10 L21 22 L26 16 L33 28 Z" stroke="#6b7f6a" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
-        <path d="M8 28 Q9 26 10 25" stroke="#6b7f6a" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
-      </svg>
-      <h3 class="service-name">
-        <span data-lang="en">Nature scattering</span><span data-lang="es">Dispersión en la naturaleza</span>
-      </h3>
-      <p class="service-desc" data-lang="en">In a meaningful landscape — a hillside, a woodland, an open field — carried out quietly and fully in compliance with regional regulations.</p>
-      <p class="service-desc" data-lang="es">En un paisaje con significado — una ladera, un bosque, un campo abierto — realizado con tranquilidad y cumplimiento normativo regional.</p>
-    </div>
-    <div class="service-card">
-      <svg class="service-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="15" y="14" width="6" height="18" rx="1" stroke="#6b7f6a" stroke-width="1.2" fill="none"/>
-        <path d="M18 14 C16 10 14 6 18 4 C22 6 20 10 18 14" stroke="#6b7f6a" stroke-width="1.2" fill="none"/>
-        <path d="M8 32 Q13 30 18 32 Q23 34 28 32" stroke="#6b7f6a" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
-      </svg>
-      <h3 class="service-name">
-        <span data-lang="en">Attended ceremony</span><span data-lang="es">Ceremonia presencial</span>
-      </h3>
-      <p class="service-desc" data-lang="en">A small, personal ceremony led by our team — with readings, flowers, and a moment of reflection — for families who want something more considered, even from afar.</p>
-      <p class="service-desc" data-lang="es">Una pequeña ceremonia personal dirigida por nuestro equipo — con lecturas, flores y un momento de reflexión — para quienes desean algo más íntimo, aunque sea desde lejos.</p>
-    </div>
-  </div>
-</section>
-
-<section class="how-section" id="process">
-  <div class="how-inner">
-    <p class="section-label">
-      <span data-lang="en">The process</span><span data-lang="es">El proceso</span>
-    </p>
-    <h2 class="section-title" data-lang="en">Simple, clear, and guided at every step</h2>
-    <h2 class="section-title" data-lang="es">Sencillo, claro y acompañado en cada paso</h2>
-    <div class="steps-grid">
-      <div class="step">
-        <div class="step-num">I</div>
-        <h4 class="step-title"><span data-lang="en">First contact</span><span data-lang="es">Primer contacto</span></h4>
-        <p class="step-desc" data-lang="en">Reach out by email or our contact form. We'll speak with you privately to understand your wishes, timeline, and any special requests.</p>
-        <p class="step-desc" data-lang="es">Escríbenos por correo o formulario. Hablaremos contigo en privado para entender tus deseos, plazos y cualquier solicitud especial.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">II</div>
-        <h4 class="step-title"><span data-lang="en">Legal consultation</span><span data-lang="es">Consulta legal</span></h4>
-        <p class="step-desc" data-lang="en">We assess the applicable regulations for your chosen location — regional ordinances, required distances from public spaces, and any permits needed — so everything is fully lawful.</p>
-        <p class="step-desc" data-lang="es">Evaluamos la normativa aplicable al lugar elegido — ordenanzas regionales, distancias requeridas de espacios públicos y permisos necesarios — para que todo sea completamente legal.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">III</div>
-        <h4 class="step-title"><span data-lang="en">Ashes received</span><span data-lang="es">Recepción de las cenizas</span></h4>
-        <p class="step-desc" data-lang="en">We guide you through the process of sending the ashes to Spain, or coordinate with a local funeral director on your behalf.</p>
-        <p class="step-desc" data-lang="es">Te orientamos en el proceso de enviar las cenizas a España, o coordinamos con una funeraria local en tu nombre.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">IV</div>
-        <h4 class="step-title"><span data-lang="en">The ceremony</span><span data-lang="es">La ceremonia</span></h4>
-        <p class="step-desc" data-lang="en">We carry out the ceremony according to your wishes — with care, full documentation, and a video recording sent to you privately.</p>
-        <p class="step-desc" data-lang="es">Realizamos la ceremonia según tus deseos — con cuidado, documentación completa y grabación de vídeo enviada en privado.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">V</div>
-        <h4 class="step-title"><span data-lang="en">Certificate & closure</span><span data-lang="es">Certificado y cierre</span></h4>
-        <p class="step-desc" data-lang="en">You receive a written certificate with GPS coordinates, date, and a personal note — a lasting record for your family.</p>
-        <p class="step-desc" data-lang="es">Recibes un certificado escrito con coordenadas GPS, fecha y nota personal — un recuerdo duradero para tu familia.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="about">
-  <div class="for-whom">
-    <div class="for-whom-visual">
-      <svg width="100%" height="100%" viewBox="0 0 460 440" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="fwG" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#c4d8a8"/><stop offset="100%" stop-color="#a8c48a"/>
-          </linearGradient>
-        </defs>
-        <rect width="460" height="440" fill="url(#fwG)"/>
-        <path d="M0 300 Q115 260 230 280 Q345 300 460 265 L460 440 L0 440 Z" fill="#8aac70" fill-opacity="0.5"/>
-        <path d="M0 350 Q115 320 230 335 Q345 350 460 320 L460 440 L0 440 Z" fill="#6b8f58" fill-opacity="0.5"/>
-        <path d="M0 390 Q115 370 230 380 Q345 390 460 368 L460 440 L0 440 Z" fill="#4a6a3a" fill-opacity="0.6"/>
-        <rect x="80" y="282" width="3" height="28" fill="#4a6a3a" fill-opacity="0.5"/>
-        <ellipse cx="82" cy="276" rx="10" ry="14" fill="#4a6a3a" fill-opacity="0.45"/>
-        <rect x="340" y="270" width="3" height="32" fill="#3a5a2c" fill-opacity="0.5"/>
-        <ellipse cx="342" cy="263" rx="12" ry="16" fill="#3a5a2c" fill-opacity="0.45"/>
-        <circle cx="180" cy="370" r="2" fill="white" fill-opacity="0.4"/>
-        <circle cx="260" cy="362" r="1.5" fill="white" fill-opacity="0.35"/>
-        <circle cx="320" cy="375" r="2" fill="white" fill-opacity="0.38"/>
-        <ellipse cx="230" cy="220" rx="180" ry="90" fill="white" fill-opacity="0.08"/>
-      </svg>
-    </div>
-    <div class="for-whom-text">
-      <p class="section-label">
-        <span data-lang="en">Who we serve</span><span data-lang="es">A quién servimos</span>
-      </p>
-      <h2 class="section-title" data-lang="en">For anyone who cannot be there</h2>
-      <h2 class="section-title" data-lang="es">Para quienes no pueden estar presentes</h2>
-      <p class="section-body" data-lang="en">Distance, circumstance, or simply the absence of someone nearby to help — we are here for all of these. Wherever you are in the world, we make it possible.</p>
-      <p class="section-body" data-lang="es">La distancia, las circunstancias o simplemente la falta de alguien cercano — estamos aquí para todo eso. Estés donde estés en el mundo, lo hacemos posible.</p>
-      <ul class="list-check" data-lang="en">
-        <li>Families abroad whose loved one wished to be scattered in Spain</li>
-        <li>People living in Spain without family nearby to carry out their wishes</li>
-        <li>Individuals who have pre-arranged their own ceremony and want it guaranteed</li>
-        <li>Those who have lost a loved one in Spain and need local, trusted support</li>
-        <li>Funeral directors and estate lawyers seeking a reliable local partner</li>
-      </ul>
-      <ul class="list-check" data-lang="es">
-        <li>Familias en el extranjero cuyo ser querido deseaba ser dispersado en España</li>
-        <li>Personas en España sin familia cercana que pueda cumplir sus deseos</li>
-        <li>Quienes han organizado su propia ceremonia con antelación y quieren garantizarla</li>
-        <li>Quienes han perdido a un ser querido en España y necesitan apoyo local de confianza</li>
-        <li>Funerarias y abogados que buscan un socio local fiable en España</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section class="testimonial-section">
-  <p class="testimonial-text" data-lang="en">"We couldn't be there. Serenas scattered our mother's ashes in the olive grove she had walked every morning for twenty years — and sent us a video so we could watch together, from thousands of miles away."</p>
-  <p class="testimonial-text" data-lang="es">"No podíamos estar allí. Serenas dispersó las cenizas de nuestra madre en el olivar que recorrió cada mañana durante veinte años — y nos enviaron un vídeo para que pudiéramos verlo juntos, a miles de kilómetros de distancia."</p>
-  <p class="testimonial-attr" data-lang="en">— The Hartley family</p>
-  <p class="testimonial-attr" data-lang="es">— La familia Hartley</p>
-</section>
-
-<section class="locations-section" id="locations">
-  <div class="locations-inner">
-    <p class="section-label">
-      <span data-lang="en">Where we operate</span><span data-lang="es">Dónde operamos</span>
-    </p>
-    <h2 class="section-title" data-lang="en">Across Spain's landscapes</h2>
-    <h2 class="section-title" data-lang="es">Por los paisajes de España</h2>
-    <div class="locations-list">
-      <div class="location-item">Andalucía <span class="sub">Málaga · Granada · Sevilla</span></div>
-      <div class="location-item">Valencia <span class="sub"><span data-lang="en">Interior & countryside</span><span data-lang="es">Interior y campo</span></span></div>
-      <div class="location-item">Cataluña <span class="sub"><span data-lang="en">Pyrenees & inland</span><span data-lang="es">Pirineos e interior</span></span></div>
-      <div class="location-item">Galicia <span class="sub"><span data-lang="en">Green north</span><span data-lang="es">Norte verde</span></span></div>
-      <div class="location-item"><span data-lang="en">Canary Islands</span><span data-lang="es">Islas Canarias</span> <span class="sub"><span data-lang="en">Year-round</span><span data-lang="es">Todo el año</span></span></div>
-      <div class="location-item"><span data-lang="en">Balearic Islands</span><span data-lang="es">Islas Baleares</span> <span class="sub">Mallorca · Menorca</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="contact-section" id="contact">
-  <p class="section-label">
-    <span data-lang="en">Get in touch</span><span data-lang="es">Ponte en contacto</span>
-  </p>
-  <h2 class="section-title" data-lang="en">Begin with a conversation</h2>
-  <h2 class="section-title" data-lang="es">Comienza con una conversación</h2>
-  <p class="section-body" data-lang="en" style="margin: 0 auto 0.5rem; text-align: center;">There is no obligation. We will listen, guide you gently, and answer every question you have.</p>
-  <p class="section-body" data-lang="es" style="margin: 0 auto 0.5rem; text-align: center;">Sin compromiso. Te escucharemos, te orientaremos con delicadeza y responderemos todas tus preguntas.</p>
-  <form class="contact-form" onsubmit="return false;">
-    <div class="contact-row">
-      <input type="text" placeholder="Your name / Tu nombre">
-      <input type="email" placeholder="Email">
-    </div>
-    <input type="text" placeholder="Country / País">
-    <textarea rows="5" placeholder="Tell us about your situation / Cuéntanos tu situación"></textarea>
-    <button type="submit" class="btn-primary" style="align-self: flex-start;">
-      <span data-lang="en">Send message</span><span data-lang="es">Enviar mensaje</span>
+ 
+  <nav class="sec-nav">
+    <button class="sec-tab active" onclick="showPanel('blog')">
+      <span class="tab-num">01</span>
+      <span data-lang="en">Blog & Information</span>
+      <span data-lang="es">Blog e Información</span>
     </button>
-    <p class="form-note" data-lang="en">All enquiries are treated with complete privacy and discretion.</p>
-    <p class="form-note" data-lang="es">Todas las consultas se tratan con total privacidad y discreción.</p>
-  </form>
-</section>
-
+    <button class="sec-tab" onclick="showPanel('admin')">
+      <span class="tab-num">02</span>
+      <span data-lang="en">Administrative Services</span>
+      <span data-lang="es">Servicios Administrativos</span>
+    </button>
+    <button class="sec-tab" onclick="showPanel('services')">
+      <span class="tab-num">03</span>
+      <span data-lang="en">Ash Scattering Services</span>
+      <span data-lang="es">Servicios de Dispersión</span>
+    </button>
+    <button class="sec-tab" onclick="showPanel('diy')">
+      <span class="tab-num">04</span>
+      <span data-lang="en">Do It Yourself Guide</span>
+      <span data-lang="es">Guía para Hacerlo Tú</span>
+      <span class="diy-hint" data-lang="en">— or let us handle it</span>
+      <span class="diy-hint" data-lang="es">— o déjanoslo a nosotros</span>
+    </button>
+  </nav>
+</header>
+ 
+<!-- ══════════════════════════════════════════
+     PANELS
+══════════════════════════════════════════ -->
+<main class="panels">
+ 
+  <!-- ── PANEL 1: BLOG ── -->
+  <section id="panel-blog" class="panel active">
+    <div class="blog-hero">
+      <div class="blog-hero-inner">
+        <div>
+          <p class="s-eyebrow" style="color:var(--sage-light)"><span data-lang="en">Blog & Information</span><span data-lang="es">Blog e Información</span></p>
+          <h1 class="blog-hero-title" data-lang="en">Guidance for one of life's <em>most difficult moments</em></h1>
+          <h1 class="blog-hero-title" data-lang="es">Orientación para uno de los momentos <em>más difíciles de la vida</em></h1>
+        </div>
+        <p class="blog-hero-body" data-lang="en">We write honestly about ash scattering in Spain — the legal landscape, what families often don't know, and what to expect at each stage. No jargon, no pressure.</p>
+        <p class="blog-hero-body" data-lang="es">Escribimos con honestidad sobre la dispersión de cenizas en España — el marco legal, lo que las familias a menudo desconocen y qué esperar en cada etapa. Sin tecnicismos, sin presión.</p>
+      </div>
+    </div>
+ 
+    <div class="blog-grid">
+      <div class="blog-card blog-featured">
+        <p class="blog-tag" data-lang="en">Legal · Featured</p>
+        <p class="blog-tag" data-lang="es">Legal · Destacado</p>
+        <h2 class="blog-title" data-lang="en">Is ash scattering legal in Spain? A plain-language guide to the rules</h2>
+        <h2 class="blog-title" data-lang="es">¿Es legal dispersar cenizas en España? Una guía clara sobre la normativa</h2>
+        <p class="blog-excerpt" data-lang="en">Spain has no single national law on ash scattering. Instead, regulation is split across 17 autonomous communities, national health legislation dating to 1974, and a patchwork of municipal ordinances. Here is what you need to know.</p>
+        <p class="blog-excerpt" data-lang="es">España no tiene una ley nacional única sobre la dispersión de cenizas. La regulación está repartida entre 17 comunidades autónomas, legislación sanitaria nacional de 1974 y una variedad de ordenanzas municipales. Esto es lo que necesitas saber.</p>
+        <a class="blog-read" href="#" data-lang="en">Read article</a>
+        <a class="blog-read" href="#" data-lang="es">Leer artículo</a>
+      </div>
+ 
+      <div class="blog-card">
+        <p class="blog-tag" data-lang="en">Practical</p>
+        <p class="blog-tag" data-lang="es">Práctico</p>
+        <h2 class="blog-title" data-lang="en">How to transport ashes into Spain from abroad</h2>
+        <h2 class="blog-title" data-lang="es">Cómo transportar cenizas a España desde el extranjero</h2>
+        <p class="blog-excerpt" data-lang="en">Bringing ashes across an international border requires specific documentation. The requirements differ depending on whether you are travelling from within the EU or from outside it.</p>
+        <p class="blog-excerpt" data-lang="es">Transportar cenizas a través de una frontera internacional requiere documentación específica. Los requisitos varían según si viajas desde dentro o fuera de la UE.</p>
+        <a class="blog-read" href="#" data-lang="en">Read article</a>
+        <a class="blog-read" href="#" data-lang="es">Leer artículo</a>
+      </div>
+ 
+      <div class="blog-card">
+        <p class="blog-tag" data-lang="en">Regional</p>
+        <p class="blog-tag" data-lang="es">Regional</p>
+        <h2 class="blog-title" data-lang="en">Protected natural spaces in Spain — where scattering is not permitted</h2>
+        <h2 class="blog-title" data-lang="es">Espacios naturales protegidos en España — dónde no está permitida la dispersión</h2>
+        <p class="blog-excerpt" data-lang="en">Spain has over 1,800 protected natural spaces. Many of the most beautiful places families request are within them. Here is how to find out whether a location is restricted.</p>
+        <p class="blog-excerpt" data-lang="es">España cuenta con más de 1.800 espacios naturales protegidos. Muchos de los lugares más hermosos que solicitan las familias se encuentran dentro de ellos. Aquí te explicamos cómo saber si un lugar está restringido.</p>
+        <a class="blog-read" href="#" data-lang="en">Read article</a>
+        <a class="blog-read" href="#" data-lang="es">Leer artículo</a>
+      </div>
+ 
+      <div class="blog-card">
+        <p class="blog-tag" data-lang="en">Grief & Planning</p>
+        <p class="blog-tag" data-lang="es">Duelo y planificación</p>
+        <h2 class="blog-title" data-lang="en">Pre-arranging your own ash scattering in Spain</h2>
+        <h2 class="blog-title" data-lang="es">Organizar tu propia dispersión de cenizas en España con antelación</h2>
+        <p class="blog-excerpt" data-lang="en">More people are choosing to arrange their own ceremony while they are still alive — leaving clear instructions and a trusted service provider in place. Here is how to think about it.</p>
+        <p class="blog-excerpt" data-lang="es">Cada vez más personas eligen organizar su propia ceremonia en vida — dejando instrucciones claras y un proveedor de confianza preparado. Así es como planteárselo.</p>
+        <a class="blog-read" href="#" data-lang="en">Read article</a>
+        <a class="blog-read" href="#" data-lang="es">Leer artículo</a>
+      </div>
+ 
+      <div class="blog-card">
+        <p class="blog-tag" data-lang="en">Maritime</p>
+        <p class="blog-tag" data-lang="es">Marítimo</p>
+        <h2 class="blog-title" data-lang="en">Maritime ash scattering in Spain — the DGMM rules explained</h2>
+        <h2 class="blog-title" data-lang="es">Dispersión marítima de cenizas en España — las normas de la DGMM explicadas</h2>
+        <p class="blog-excerpt" data-lang="en">Scattering at sea in Spain is governed by the Dirección General de la Marina Mercante. There are specific distance requirements, vessel certification rules, and documentation obligations.</p>
+        <p class="blog-excerpt" data-lang="es">La dispersión marítima en España está regulada por la Dirección General de la Marina Mercante. Existen requisitos específicos de distancia, normas de certificación de embarcaciones y obligaciones documentales.</p>
+        <a class="blog-read" href="#" data-lang="en">Read article</a>
+        <a class="blog-read" href="#" data-lang="es">Leer artículo</a>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ── PANEL 2: ADMIN ── -->
+  <section id="panel-admin" class="panel">
+    <div class="admin-hero">
+      <div>
+        <p class="s-eyebrow"><span data-lang="en">Administrative Services</span><span data-lang="es">Servicios Administrativos</span></p>
+        <h1 class="s-title" data-lang="en">All the paperwork,<br><em>none of the stress</em></h1>
+        <h1 class="s-title" data-lang="es">Todos los trámites,<br><em>ningún estrés</em></h1>
+        <p class="s-body" data-lang="en">Navigating Spanish bureaucracy from abroad — or even from within Spain without the right contacts — is complex and time-consuming. We act as your representative on the ground, managing every administrative step so your family can focus on what matters.</p>
+        <p class="s-body" data-lang="es">Gestionar la burocracia española desde el extranjero — o incluso desde dentro de España sin los contactos adecuados — es complejo y lleva mucho tiempo. Actuamos como tu representante local, gestionando cada paso administrativo para que tu familia pueda centrarse en lo que importa.</p>
+      </div>
+      <div>
+        <div style="background:var(--mist);padding:2rem;border-left:2px solid var(--sage)">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--stone);margin-bottom:0.5rem;font-style:italic" data-lang="en">"We verified the location, handled the paperwork, and coordinated with the local funeral director — all before the family had to make a single call."</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--stone);margin-bottom:0.5rem;font-style:italic" data-lang="es">"Verificamos el lugar, gestionamos los trámites y nos coordinamos con la funeraria local — todo antes de que la familia tuviera que hacer una sola llamada."</p>
+          <p style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage)" data-lang="en">— How we work</p>
+          <p style="font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--sage)" data-lang="es">— Así trabajamos</p>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="task-grid">
+      <div class="task-card">
+        <div class="task-num">01</div>
+        <h3 class="task-name"><span data-lang="en">Legal framework check</span><span data-lang="es">Verificación del marco legal</span></h3>
+        <p class="task-desc" data-lang="en">We identify the applicable regional and national regulations for your chosen location — confirming what is permitted, what requires authorisation, and what documentation is needed.</p>
+        <p class="task-desc" data-lang="es">Identificamos la normativa regional y nacional aplicable al lugar elegido — confirmando qué está permitido, qué requiere autorización y qué documentación es necesaria.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-num">02</div>
+        <h3 class="task-name"><span data-lang="en">Ashes transport coordination</span><span data-lang="es">Coordinación del transporte</span></h3>
+        <p class="task-desc" data-lang="en">We guide your funeral director or family through the documentation required to bring ashes into Spain lawfully — including customs declarations and regional requirements.</p>
+        <p class="task-desc" data-lang="es">Orientamos a tu funeraria o familia en la documentación necesaria para introducir las cenizas en España legalmente — incluyendo declaraciones aduaneras y requisitos regionales.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-num">03</div>
+        <h3 class="task-name"><span data-lang="en">Location research & approval</span><span data-lang="es">Investigación y aprobación del lugar</span></h3>
+        <p class="task-desc" data-lang="en">We verify the chosen location is not within a protected natural space or restricted zone, and obtain any necessary written permissions from landowners or authorities.</p>
+        <p class="task-desc" data-lang="es">Verificamos que el lugar elegido no esté en un espacio natural protegido o zona restringida, y obtenemos los permisos escritos necesarios de propietarios o autoridades.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-num">04</div>
+        <h3 class="task-name"><span data-lang="en">Third-party coordination</span><span data-lang="es">Coordinación con terceros</span></h3>
+        <p class="task-desc" data-lang="en">Where the ceremony involves a vessel, a private venue, or a landowner, we liaise directly — so your family has no calls to make in a language they may not speak.</p>
+        <p class="task-desc" data-lang="es">Cuando la ceremonia implica una embarcación, recinto privado o propietario, nos coordinamos directamente — para que tu familia no tenga que hacer llamadas en un idioma que quizás no habla.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-num">05</div>
+        <h3 class="task-name"><span data-lang="en">Ceremony documentation</span><span data-lang="es">Documentación de la ceremonia</span></h3>
+        <p class="task-desc" data-lang="en">A full written record of the ceremony — date, time, GPS coordinates, conditions, and any personal elements included — prepared for your family's records.</p>
+        <p class="task-desc" data-lang="es">Un registro escrito completo de la ceremonia — fecha, hora, coordenadas GPS, condiciones y elementos personales incluidos — preparado para los archivos de tu familia.</p>
+      </div>
+      <div class="task-card">
+        <div class="task-num">06</div>
+        <h3 class="task-name"><span data-lang="en">Certificate of scattering</span><span data-lang="es">Certificado de dispersión</span></h3>
+        <p class="task-desc" data-lang="en">A formal signed certificate issued after the ceremony — including all relevant details — for the family's records or use in estate and legal proceedings.</p>
+        <p class="task-desc" data-lang="es">Un certificado formal firmado emitido tras la ceremonia — con todos los detalles relevantes — para los archivos de la familia o su uso en trámites sucesorios y legales.</p>
+      </div>
+    </div>
+ 
+    <div class="included-strip">
+      <div class="included-inner">
+        <div>
+          <h2 class="inc-title" data-lang="en"><em>Everything</em> included as standard</h2>
+          <h2 class="inc-title" data-lang="es"><em>Todo</em> incluido de serie</h2>
+          <p class="inc-body" data-lang="en">The full administrative service comes as standard with every ceremony — unattended or attended. Families should not pay extra to be protected and properly documented.</p>
+          <p class="inc-body" data-lang="es">El servicio administrativo completo está incluido de serie en cada ceremonia — sin presencia o con presencia. Las familias no deberían pagar extra para estar protegidas y correctamente documentadas.</p>
+          <button class="diy-cta" onclick="showPanel('services')">
+            <span data-lang="en">View ceremony services →</span>
+            <span data-lang="es">Ver servicios de ceremonia →</span>
+          </button>
+        </div>
+        <ul class="checklist" data-lang="en">
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Legal framework verification</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Guidance on transporting ashes into Spain</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Protected space check</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Coordination with venues & landowners</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Private video recording</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Full written record with GPS & date</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Signed certificate of scattering</li>
+        </ul>
+        <ul class="checklist" data-lang="es">
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Verificación del marco legal</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Orientación para el transporte de cenizas a España</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Verificación de espacios protegidos</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Coordinación con recintos y propietarios</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Grabación de vídeo privada</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Registro escrito completo con GPS y fecha</li>
+          <li><svg class="chk" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7.5" stroke="#6b7f6a" stroke-opacity="0.45"/><path d="M4.5 8 L7 10.5 L11.5 5.5" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Certificado firmado de dispersión</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ── PANEL 3: SERVICES ── -->
+  <section id="panel-services" class="panel">
+    <div class="services-hero">
+      <div class="services-hero-left">
+        <p class="s-eyebrow"><span data-lang="en">Ash Scattering Services</span><span data-lang="es">Servicios de Dispersión</span></p>
+        <h1 class="s-title" data-lang="en">A <em>gentle return</em><br>to the land they loved</h1>
+        <h1 class="s-title" data-lang="es">Un <em>regreso sereno</em><br>a la tierra que amaron</h1>
+        <p class="s-body" data-lang="en">When you cannot be there in person, we carry out your loved one's final wishes — with presence, care, and quiet ceremony — in the landscapes, gardens, and hillsides of Spain they held dear.</p>
+        <p class="s-body" data-lang="es">Cuando no puedes estar presente, cumplimos los últimos deseos de tu ser querido — con presencia, cuidado y ceremonia íntima — en los paisajes, jardines y colinas de España que tanto amaron.</p>
+      </div>
+      <div class="services-hero-right">
+        <svg class="landscape-svg" viewBox="0 0 600 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#e8ede0"/><stop offset="60%" stop-color="#cdd9bc"/><stop offset="100%" stop-color="#b0c49a"/></linearGradient>
+            <linearGradient id="h1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8aac70"/><stop offset="100%" stop-color="#6b8f58"/></linearGradient>
+            <linearGradient id="h2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7a9e62"/><stop offset="100%" stop-color="#5a7a48"/></linearGradient>
+          </defs>
+          <rect width="600" height="500" fill="url(#sg)"/>
+          <path d="M-10 320 Q80 280 180 300 Q280 320 380 290 Q480 260 610 295 L610 500 L-10 500Z" fill="#c8d8b4" fill-opacity="0.7"/>
+          <path d="M-10 370 Q80 340 180 358 Q280 376 380 348 Q470 325 610 355 L610 500 L-10 500Z" fill="url(#h2)"/>
+          <path d="M-10 420 Q100 400 220 412 Q340 424 460 402 Q530 392 610 405 L610 500 L-10 500Z" fill="url(#h1)"/>
+          <rect x="60" y="325" width="3" height="24" fill="#5a7a48" fill-opacity="0.5"/>
+          <ellipse cx="62" cy="320" rx="9" ry="13" fill="#5a7a48" fill-opacity="0.45"/>
+          <rect x="480" y="318" width="3" height="26" fill="#4a6a3a" fill-opacity="0.5"/>
+          <ellipse cx="482" cy="312" rx="10" ry="14" fill="#4a6a3a" fill-opacity="0.45"/>
+          <rect x="20" y="380" width="4" height="50" fill="#3a5a2c"/>
+          <ellipse cx="22" cy="374" rx="14" ry="19" fill="#3a5a2c"/>
+          <rect x="570" y="375" width="4" height="52" fill="#3a5a2c"/>
+          <ellipse cx="572" cy="368" rx="14" ry="20" fill="#3a5a2c"/>
+          <circle cx="200" cy="408" r="2" fill="white" fill-opacity="0.5"/>
+          <circle cx="300" cy="415" r="1.8" fill="white" fill-opacity="0.45"/>
+          <circle cx="390" cy="406" r="2" fill="white" fill-opacity="0.4"/>
+          <circle cx="180" cy="230" r="2" fill="white" fill-opacity="0.3"/>
+          <circle cx="280" cy="210" r="1.5" fill="white" fill-opacity="0.25"/>
+          <circle cx="360" cy="225" r="2" fill="white" fill-opacity="0.28"/>
+          <ellipse cx="300" cy="260" rx="180" ry="80" fill="white" fill-opacity="0.05"/>
+        </svg>
+      </div>
+    </div>
+ 
+    <div class="svc-grid">
+      <div class="svc-card">
+        <svg class="svc-icon" viewBox="0 0 36 36" fill="none"><path d="M18 30 L18 16" stroke="#6b7f6a" stroke-width="1.2" stroke-linecap="round"/><path d="M18 16 Q14 10 10 8 Q14 14 18 16" stroke="#6b7f6a" stroke-width="1.2"/><path d="M18 20 Q22 14 26 12 Q22 18 18 20" stroke="#6b7f6a" stroke-width="1.2"/><path d="M6 30 Q18 27 30 30" stroke="#6b7f6a" stroke-width="1" stroke-linecap="round" opacity="0.5"/></svg>
+        <h3 class="svc-name"><span data-lang="en">Garden & private land</span><span data-lang="es">Jardín y terreno privado</span></h3>
+        <p class="svc-desc" data-lang="en">Scattered in a cherished private garden or meaningful outdoor space — with the landowner's permission and full care for the setting.</p>
+        <p class="svc-desc" data-lang="es">Dispersadas en un jardín privado o lugar especial — con el permiso del propietario y pleno cuidado del entorno.</p>
+      </div>
+      <div class="svc-card">
+        <svg class="svc-icon" viewBox="0 0 36 36" fill="none"><path d="M3 28 L12 10 L21 22 L26 16 L33 28 Z" stroke="#6b7f6a" stroke-width="1.2" stroke-linejoin="round" fill="none"/><path d="M8 28 Q9 26 10 25" stroke="#6b7f6a" stroke-width="1" stroke-linecap="round" opacity="0.5"/></svg>
+        <h3 class="svc-name"><span data-lang="en">Nature scattering</span><span data-lang="es">Dispersión en la naturaleza</span></h3>
+        <p class="svc-desc" data-lang="en">In a meaningful landscape — a hillside, a woodland, an open field — carried out quietly and fully in compliance with regional regulations.</p>
+        <p class="svc-desc" data-lang="es">En un paisaje con significado — una ladera, un bosque, un campo — realizado con tranquilidad y pleno cumplimiento normativo.</p>
+      </div>
+      <div class="svc-card">
+        <svg class="svc-icon" viewBox="0 0 36 36" fill="none"><rect x="15" y="14" width="6" height="18" rx="1" stroke="#6b7f6a" stroke-width="1.2" fill="none"/><path d="M18 14 C16 10 14 6 18 4 C22 6 20 10 18 14" stroke="#6b7f6a" stroke-width="1.2" fill="none"/><path d="M8 32 Q13 30 18 32 Q23 34 28 32" stroke="#6b7f6a" stroke-width="1" stroke-linecap="round" opacity="0.5"/></svg>
+        <h3 class="svc-name"><span data-lang="en">Attended ceremony</span><span data-lang="es">Ceremonia presencial</span></h3>
+        <p class="svc-desc" data-lang="en">A small, personal ceremony led by our team — with readings, flowers, and a moment of reflection — for families who want something more considered.</p>
+        <p class="svc-desc" data-lang="es">Una pequeña ceremonia personal dirigida por nuestro equipo — con lecturas, flores y reflexión — para quienes desean algo más íntimo.</p>
+      </div>
+    </div>
+ 
+    <div class="steps-band">
+      <div class="steps-inner">
+        <p class="s-label"><span data-lang="en">The process</span><span data-lang="es">El proceso</span></p>
+        <h2 class="s-title" data-lang="en">How it works</h2>
+        <h2 class="s-title" data-lang="es">Cómo funciona</h2>
+        <div class="steps-row">
+          <div class="step"><div class="step-num">I</div><h4 class="step-title"><span data-lang="en">First contact</span><span data-lang="es">Primer contacto</span></h4><p class="step-desc" data-lang="en">Reach out by email or form. We speak privately to understand your wishes and timeline.</p><p class="step-desc" data-lang="es">Escríbenos. Hablamos en privado para entender tus deseos y plazos.</p></div>
+          <div class="step"><div class="step-num">II</div><h4 class="step-title"><span data-lang="en">Legal consultation</span><span data-lang="es">Consulta legal</span></h4><p class="step-desc" data-lang="en">We verify applicable regulations, check for protected zones, and confirm what permits are needed.</p><p class="step-desc" data-lang="es">Verificamos la normativa, comprobamos zonas protegidas y confirmamos los permisos necesarios.</p></div>
+          <div class="step"><div class="step-num">III</div><h4 class="step-title"><span data-lang="en">Ashes received</span><span data-lang="es">Recepción de cenizas</span></h4><p class="step-desc" data-lang="en">We guide the transport process or coordinate with a local funeral director on your behalf.</p><p class="step-desc" data-lang="es">Orientamos el proceso de transporte o coordinamos con una funeraria local en tu nombre.</p></div>
+          <div class="step"><div class="step-num">IV</div><h4 class="step-title"><span data-lang="en">The ceremony</span><span data-lang="es">La ceremonia</span></h4><p class="step-desc" data-lang="en">We carry out the ceremony with care — documented and recorded privately for your family.</p><p class="step-desc" data-lang="es">Realizamos la ceremonia con cuidado — documentada y grabada en privado para tu familia.</p></div>
+          <div class="step"><div class="step-num">V</div><h4 class="step-title"><span data-lang="en">Certificate & closure</span><span data-lang="es">Certificado y cierre</span></h4><p class="step-desc" data-lang="en">You receive a signed certificate with GPS coordinates and date — a lasting record for your family.</p><p class="step-desc" data-lang="es">Recibes un certificado firmado con coordenadas GPS y fecha — un recuerdo duradero para tu familia.</p></div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="locations-band">
+      <div class="locations-inner">
+        <p class="s-label"><span data-lang="en">Where we operate</span><span data-lang="es">Dónde operamos</span></p>
+        <h2 class="s-title" data-lang="en">Across Spain's landscapes</h2>
+        <h2 class="s-title" data-lang="es">Por los paisajes de España</h2>
+        <div class="locations-list">
+          <div class="location-item">Andalucía <span class="sub">Málaga · Granada · Sevilla</span></div>
+          <div class="location-item">Valencia <span class="sub"><span data-lang="en">Interior & countryside</span><span data-lang="es">Interior y campo</span></span></div>
+          <div class="location-item">Cataluña <span class="sub"><span data-lang="en">Pyrenees & inland</span><span data-lang="es">Pirineos e interior</span></span></div>
+          <div class="location-item">Galicia <span class="sub"><span data-lang="en">Green north</span><span data-lang="es">Norte verde</span></span></div>
+          <div class="location-item"><span data-lang="en">Canary Islands</span><span data-lang="es">Islas Canarias</span><span class="sub"><span data-lang="en">Year-round</span><span data-lang="es">Todo el año</span></span></div>
+          <div class="location-item"><span data-lang="en">Balearic Islands</span><span data-lang="es">Islas Baleares</span><span class="sub">Mallorca · Menorca</span></div>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Contact form -->
+    <div style="background:var(--sage-pale);padding:5rem 3rem;text-align:center" id="contact">
+      <div style="max-width:600px;margin:0 auto">
+        <p class="s-eyebrow"><span data-lang="en">Get in touch</span><span data-lang="es">Ponte en contacto</span></p>
+        <h2 class="s-title" data-lang="en">Begin with a conversation</h2>
+        <h2 class="s-title" data-lang="es">Comienza con una conversación</h2>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:2rem;line-height:1.9" data-lang="en">No obligation. We listen, guide you gently, and answer every question you have.</p>
+        <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:2rem;line-height:1.9" data-lang="es">Sin compromiso. Te escuchamos, orientamos con delicadeza y respondemos todas tus preguntas.</p>
+        <div style="display:flex;flex-direction:column;gap:1rem;text-align:left">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+            <input type="text" placeholder="Name / Nombre" style="font-family:'Jost',sans-serif;font-weight:300;font-size:0.88rem;padding:0.9rem 1.1rem;border:1px solid rgba(107,127,106,0.25);background:white;color:var(--text);outline:none">
+            <input type="email" placeholder="Email" style="font-family:'Jost',sans-serif;font-weight:300;font-size:0.88rem;padding:0.9rem 1.1rem;border:1px solid rgba(107,127,106,0.25);background:white;color:var(--text);outline:none">
+          </div>
+          <input type="text" placeholder="Country / País" style="font-family:'Jost',sans-serif;font-weight:300;font-size:0.88rem;padding:0.9rem 1.1rem;border:1px solid rgba(107,127,106,0.25);background:white;color:var(--text);outline:none">
+          <textarea rows="4" placeholder="Tell us about your situation / Cuéntanos tu situación" style="font-family:'Jost',sans-serif;font-weight:300;font-size:0.88rem;padding:0.9rem 1.1rem;border:1px solid rgba(107,127,106,0.25);background:white;color:var(--text);outline:none;resize:none"></textarea>
+          <button class="btn-white" style="background:var(--sage);color:white;align-self:flex-start;border:none;cursor:pointer">
+            <span data-lang="en">Send message</span><span data-lang="es">Enviar mensaje</span>
+          </button>
+          <p style="font-size:0.75rem;color:var(--text-muted)" data-lang="en">All enquiries are treated with complete privacy and discretion.</p>
+          <p style="font-size:0.75rem;color:var(--text-muted)" data-lang="es">Todas las consultas se tratan con total privacidad y discreción.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ── PANEL 4: DIY ── -->
+  <section id="panel-diy" class="panel">
+    <div class="diy-hero">
+      <div class="diy-hero-inner">
+        <p class="s-eyebrow" style="color:var(--sage-light)"><span data-lang="en">Do It Yourself Guide</span><span data-lang="es">Guía para Hacerlo Tú</span></p>
+        <div class="diy-hero-grid">
+          <div>
+            <h1 class="blog-hero-title" data-lang="en">How to arrange ash scattering in Spain <em>yourself</em></h1>
+            <h1 class="blog-hero-title" data-lang="es">Cómo organizar la dispersión de cenizas en España <em>tú mismo</em></h1>
+            <p class="blog-hero-body" style="margin-top:1rem" data-lang="en">This guide walks you through every step — from confirming the legal framework in your chosen region to obtaining permissions, coordinating transport, and documenting the ceremony. It is entirely doable. It is also, frankly, a lot.</p>
+            <p class="blog-hero-body" style="margin-top:1rem" data-lang="es">Esta guía te lleva por cada paso — desde confirmar el marco legal en la región elegida hasta obtener permisos, coordinar el transporte y documentar la ceremonia. Es perfectamente factible. También es, seamos honestos, bastante trabajo.</p>
+          </div>
+          <div class="diy-warning">
+            <p class="diy-warning-title" data-lang="en">A gentle word before you begin</p>
+            <p class="diy-warning-title" data-lang="es">Una nota antes de empezar</p>
+            <p class="diy-warning-body" data-lang="en">Everything in this guide is genuinely achievable without professional help. But between the regional regulation research, language barriers, protected space checks, third-party coordination, and documentation — most families find it considerably more involved than they expected. If at any point it feels like too much, we are here.</p>
+            <p class="diy-warning-body" data-lang="es">Todo lo que aparece en esta guía es perfectamente posible sin ayuda profesional. Pero entre la investigación normativa regional, las barreras idiomáticas, la verificación de zonas protegidas, la coordinación con terceros y la documentación — la mayoría de familias lo encuentran considerablemente más complejo de lo esperado. Si en algún momento se hace demasiado, aquí estamos.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1.25rem;align-items:center">
+              <a href="YOUR_PAYMENT_LINK_HERE" target="_blank" style="font-family:'Jost',sans-serif;font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.7rem 1.5rem;background:var(--sage-light);color:var(--stone);text-decoration:none;transition:all 0.25s;white-space:nowrap;border:1px solid var(--sage-light)">
+                <span data-lang="en">Buy the full guide →</span>
+                <span data-lang="es">Comprar la guía completa →</span>
+              </a>
+              <button class="diy-cta" style="margin-top:0" onclick="showPanel('services')">
+                <span data-lang="en">Let us handle it instead</span>
+                <span data-lang="es">Déjanoslo a nosotros</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="guide-steps">
+      <div class="guide-step">
+        <div class="guide-step-num">1</div>
+        <div class="guide-step-content">
+          <h3 class="guide-step-title" data-lang="en">Establish which region's rules apply</h3>
+          <h3 class="guide-step-title" data-lang="es">Determina qué normativa regional aplica</h3>
+          <p class="guide-step-body" data-lang="en">Spain has no unified national law on ash scattering. The baseline is set by Decreto 2263/1974 and Ley 14/1986, but each of the 17 autonomous communities may have its own legislation that supplements or supersedes this. Start by identifying the comunidad autónoma of your chosen location and researching whether it has specific dispersión de cenizas regulations.</p>
+          <p class="guide-step-body" data-lang="es">España no tiene una ley nacional unificada sobre la dispersión de cenizas. La base la establecen el Decreto 2263/1974 y la Ley 14/1986, pero cada una de las 17 comunidades autónomas puede tener su propia legislación que complementa o sustituye a esta. Comienza identificando la comunidad autónoma del lugar elegido e investiga si tiene normativa específica sobre dispersión de cenizas.</p>
+          <div class="guide-step-note" data-lang="en">Key regions with explicit frameworks: Asturias (Decreto 72/1998, modified 2023), Cataluña (Decret 297/1997), Galicia (Decreto 134/1998). Others operate primarily under national law.</div>
+          <div class="guide-step-note" data-lang="es">Regiones con marcos explícitos: Asturias (Decreto 72/1998, modificado 2023), Cataluña (Decret 297/1997), Galicia (Decreto 134/1998). Otras operan principalmente bajo la ley nacional.</div>
+        </div>
+      </div>
+ 
+      <div class="guide-step">
+        <div class="guide-step-num">2</div>
+        <div class="guide-step-content">
+          <h3 class="guide-step-title" data-lang="en">Check whether the location is a protected natural space</h3>
+          <h3 class="guide-step-title" data-lang="es">Comprueba si el lugar es un espacio natural protegido</h3>
+          <p class="guide-step-body" data-lang="en">Spain has over 1,800 protected natural areas, including national parks, nature reserves, and Natura 2000 sites. Scattering is prohibited or strictly controlled in all of them. Use the Red de Espacios Naturales Protegidos de España (RENPE) database or the Ministerio para la Transición Ecológica's online viewer to check whether your chosen location falls within a protected boundary.</p>
+          <p class="guide-step-body" data-lang="es">España cuenta con más de 1.800 espacios naturales protegidos, incluyendo parques nacionales, reservas naturales y espacios Natura 2000. La dispersión está prohibida o estrictamente controlada en todos ellos. Utiliza la base de datos de la Red de Espacios Naturales Protegidos de España (RENPE) o el visor en línea del Ministerio para la Transición Ecológica para comprobar si el lugar elegido se encuentra dentro de un límite protegido.</p>
+          <div class="guide-step-note" data-lang="en">Even if a location is not in a protected area, proximity to water sources, urban nuclei, or agricultural land may impose additional restrictions under regional health and environmental law.</div>
+          <div class="guide-step-note" data-lang="es">Aunque un lugar no esté en un espacio protegido, la proximidad a fuentes de agua, núcleos urbanos o terrenos agrícolas puede imponer restricciones adicionales bajo la normativa sanitaria y medioambiental regional.</div>
+        </div>
+      </div>
+ 
+      <div class="guide-step">
+        <div class="guide-step-num">3</div>
+        <div class="guide-step-content">
+          <h3 class="guide-step-title" data-lang="en">Obtain landowner or authority permission</h3>
+          <h3 class="guide-step-title" data-lang="es">Obtén el permiso del propietario o la autoridad</h3>
+          <p class="guide-step-body" data-lang="en">For private land, written permission from the landowner is strongly advisable and in some regions legally required. For public land, contact the relevant municipal or regional authority (ayuntamiento or delegación territorial) to determine whether notification or formal permission is required. Do this in writing and keep records of all correspondence.</p>
+          <p class="guide-step-body" data-lang="es">Para terrenos privados, el permiso escrito del propietario es muy recomendable y en algunas regiones legalmente obligatorio. Para terrenos públicos, contacta con la autoridad municipal o regional competente (ayuntamiento o delegación territorial) para determinar si se requiere notificación o permiso formal. Hazlo por escrito y conserva todos los registros.</p>
+          <div class="guide-step-note" data-lang="en">If the landowner or authority does not respond in writing, document your attempts. In the event of any dispute, a record of good-faith communication is important.</div>
+          <div class="guide-step-note" data-lang="es">Si el propietario o la autoridad no responde por escrito, documenta tus intentos. Ante cualquier disputa, es importante tener un registro de comunicación de buena fe.</div>
+        </div>
+      </div>
+ 
+      <div class="guide-step">
+        <div class="guide-step-num">4</div>
+        <div class="guide-step-content">
+          <h3 class="guide-step-title" data-lang="en">Arrange transport of the ashes into Spain</h3>
+          <h3 class="guide-step-title" data-lang="es">Organiza el transporte de las cenizas a España</h3>
+          <p class="guide-step-body" data-lang="en">If the ashes are coming from outside Spain, they must be accompanied by specific documentation. From EU countries: a death certificate (apostilled if required), a cremation certificate, and a declaration that the urn contains human ashes. From non-EU countries: the same documents plus any customs declarations required by the origin country. The urn should be transported in cabin baggage and declared at customs. Some airlines have specific policies — check in advance.</p>
+          <p class="guide-step-body" data-lang="es">Si las cenizas provienen del extranjero, deben ir acompañadas de documentación específica. Desde países de la UE: certificado de defunción (apostillado si es necesario), certificado de cremación y declaración de que la urna contiene cenizas humanas. Desde países fuera de la UE: los mismos documentos más las declaraciones aduaneras requeridas por el país de origen. La urna debe transportarse en equipaje de mano y declararse en aduanas. Algunas aerolíneas tienen políticas específicas — consulta con antelación.</p>
+          <div class="guide-step-note" data-lang="en">Spain's customs authority (AEAT) does not have a specific form for importing ashes. A written declaration accompanying the documents is generally sufficient, but requirements can vary by port of entry.</div>
+          <div class="guide-step-note" data-lang="es">La Agencia Tributaria española (AEAT) no dispone de un formulario específico para importar cenizas. Una declaración escrita que acompañe a los documentos suele ser suficiente, aunque los requisitos pueden variar según el puerto de entrada.</div>
+        </div>
+      </div>
+ 
+      <div class="guide-step">
+        <div class="guide-step-num">5</div>
+        <div class="guide-step-content">
+          <h3 class="guide-step-title" data-lang="en">Carry out the ceremony</h3>
+          <h3 class="guide-step-title" data-lang="es">Realiza la ceremonia</h3>
+          <p class="guide-step-body" data-lang="en">On the day, bring all your permission documents with you. Scatter in a respectful manner — avoiding proximity to paths, water sources, or other visitors. Record the GPS coordinates, date, and time of scattering. Take photographs if the family wishes to have a visual record.</p>
+          <p class="guide-step-body" data-lang="es">El día de la ceremonia, lleva contigo toda la documentación de permisos. Dispersa de forma respetuosa — evitando la proximidad a caminos, fuentes de agua u otros visitantes. Registra las coordenadas GPS, la fecha y la hora de la dispersión. Toma fotografías si la familia desea tener un registro visual.</p>
+          <div class="guide-step-note" data-lang="en">If you are scattering at sea, the DGMM requires the ceremony to take place at a minimum distance from the shoreline (typically 500 metres or more) and from a vessel with appropriate certification. This must be booked in advance through a licensed operator.</div>
+          <div class="guide-step-note" data-lang="es">Si la dispersión es marítima, la DGMM exige que la ceremonia se realice a una distancia mínima de la orilla (habitualmente 500 metros o más) y desde una embarcación con la certificación adecuada. Esto debe reservarse con antelación a través de un operador autorizado.</div>
+        </div>
+      </div>
+ 
+      <div class="guide-step">
+        <div class="guide-step-num">6</div>
+        <div class="guide-step-content">
+          <h3 class="guide-step-title" data-lang="en">Document and archive everything</h3>
+          <h3 class="guide-step-title" data-lang="es">Documenta y archívalo todo</h3>
+          <p class="guide-step-body" data-lang="en">Create a written record of the ceremony: the exact location (including GPS coordinates), date, time, those present, and a description of what took place. Keep copies of all permissions obtained. This documentation may be needed for estate purposes, inheritance proceedings, or simply as a lasting record for your family. There is no official Spanish certificate of scattering — you create and sign this yourself, or use a template.</p>
+          <p class="guide-step-body" data-lang="es">Elabora un registro escrito de la ceremonia: la ubicación exacta (incluyendo coordenadas GPS), fecha, hora, personas presentes y descripción de lo ocurrido. Conserva copias de todos los permisos obtenidos. Esta documentación puede ser necesaria para trámites sucesorios, procedimientos de herencia o simplemente como recuerdo duradero para tu familia. No existe un certificado oficial español de dispersión — lo creas y firmas tú mismo, o usas una plantilla.</p>
+          <div class="guide-step-note" data-lang="en">If you would like a formal certificate of scattering — signed and issued by a registered service provider — we can issue one as part of our service, even if you carry out the ceremony yourself.</div>
+          <div class="guide-step-note" data-lang="es">Si deseas un certificado formal de dispersión — firmado y emitido por un proveedor de servicios registrado — podemos emitirlo como parte de nuestro servicio, aunque realices la ceremonia tú mismo.</div>
+        </div>
+      </div>
+    </div>
+ 
+    <div class="diy-bottom-cta">
+      <div class="diy-bottom-cta-inner">
+        <h2 data-lang="en">Still reading? <em>We thought so.</em></h2>
+        <h2 data-lang="es">¿Todavía leyendo? <em>Lo imaginábamos.</em></h2>
+        <p data-lang="en">Every step above is something we do as a matter of course — so families don't have to. Buy the complete guide to keep offline, or let us handle everything for you.</p>
+        <p data-lang="es">Cada uno de los pasos anteriores es algo que hacemos habitualmente — para que las familias no tengan que hacerlo. Compra la guía completa para tenerla sin conexión, o déjanos gestionarlo todo.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;align-items:center;margin-top:0.5rem">
+          <a href="YOUR_PAYMENT_LINK_HERE" target="_blank" style="font-family:'Jost',sans-serif;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.9rem 2rem;background:white;color:var(--sage);text-decoration:none;transition:all 0.25s;border:2px solid white;white-space:nowrap">
+            <span data-lang="en">Buy the full guide</span>
+            <span data-lang="es">Comprar la guía completa</span>
+          </a>
+          <button class="btn-white" style="background:transparent;color:white;border:1px solid rgba(255,255,255,0.4)" onclick="showPanel('services');document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+            <span data-lang="en">Get in touch instead</span>
+            <span data-lang="es">Contactar en su lugar</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+</main>
+ 
 <footer>
-  <div class="footer-logo">seren<span>as</span></div>
-  <ul class="footer-links">
-    <li><a href="#services"><span data-lang="en">Services</span><span data-lang="es">Servicios</span></a></li>
-    <li><a href="#process"><span data-lang="en">Process</span><span data-lang="es">Proceso</span></a></li>
-    <li><a href="#locations"><span data-lang="en">Locations</span><span data-lang="es">Lugares</span></a></li>
-    <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
-  </ul>
+  <div class="footer-logo">seren<em>as</em></div>
   <p class="footer-copy">© 2025 Serenas · Spain</p>
 </footer>
-
+ 
 <script>
   function setLang(lang) {
-    document.body.className = 'lang-' + lang;
+    document.body.className = document.body.className.replace(/lang-\w+/, '') + ' lang-' + lang;
+    document.body.className = document.body.className.trim();
     document.documentElement.lang = lang;
     document.querySelectorAll('.lang-btn').forEach(function(b) {
       b.classList.toggle('active', b.getAttribute('title').toLowerCase() === (lang === 'en' ? 'english' : 'español'));
     });
+  }
+ 
+  function showPanel(id) {
+    document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.sec-tab').forEach(function(t) { t.classList.remove('active'); });
+    var panel = document.getElementById('panel-' + id);
+    if (panel) panel.classList.add('active');
+    var tabs = { blog: 0, admin: 1, services: 2, diy: 3 };
+    var tabEls = document.querySelectorAll('.sec-tab');
+    if (tabs[id] !== undefined && tabEls[tabs[id]]) tabEls[tabs[id]].classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+ 
+  function showContact() {
+    showPanel('services');
+    setTimeout(function() {
+      var el = document.getElementById('contact');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   }
 </script>
 </body>
